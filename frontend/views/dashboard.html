@@ -1,0 +1,257 @@
+<div class="mb-8">
+  <h2 class="text-3xl font-black section-title" id="briefing-title">
+    Loading Briefing...
+  </h2>
+  <p class="section-subtitle mt-2" id="briefing-content">
+    Connecting to Supabase Intelligence Core...
+  </p>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Live Telemetry</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>AI Models Synced</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Intervention Clock Active</span
+    >
+  </div>
+  <p class="text-xs text-cyan-800 font-bold mt-3">
+    Dashboard mission: detect risk spikes early and trigger intervention
+    workflows before exam collapse.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+  <div
+    class="bg-white p-6 rounded-2xl border-t-4 border-blue-500 panel-card stagger-up"
+  >
+    <p
+      class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1"
+    >
+      Total Monitored
+    </p>
+    <h3 class="text-4xl font-black text-slate-800 kpi-number" id="kpi-total">
+      --
+    </h3>
+    <p class="text-xs text-blue-500 font-bold mt-2">Active Students</p>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border-t-4 border-green-500 panel-card stagger-up"
+  >
+    <p
+      class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1"
+    >
+      Department Health
+    </p>
+    <h3 class="text-4xl font-black text-slate-800 kpi-number" id="kpi-safe">
+      --%
+    </h3>
+    <p class="text-xs text-green-500 font-bold mt-2">Safe Rate</p>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border-t-4 border-red-500 panel-card stagger-up"
+  >
+    <p
+      class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1"
+    >
+      AI Risk Flags
+    </p>
+    <h3 class="text-4xl font-black text-slate-800 kpi-number" id="kpi-risk">
+      --
+    </h3>
+    <p class="text-xs text-red-500 font-bold mt-2">Require Intervention</p>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border-t-4 border-cyan-500 flex flex-col justify-center items-center cursor-pointer hover:bg-cyan-50 transition panel-card stagger-up"
+    onclick="loadView('audit')"
+  >
+    <svg
+      class="w-8 h-8 text-cyan-600 mb-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      ></path>
+    </svg>
+    <p class="text-xs font-bold text-cyan-700">Open Risk Registry</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Cohort Shock Detector
+      </h3>
+      <span
+        class="text-[10px] font-black uppercase bg-red-100 text-red-700 px-2 py-1 rounded-full"
+        >Live</span
+      >
+    </div>
+    <p id="shock-summary" class="text-xs text-slate-500 mb-4">
+      Running cross-department anomaly scan...
+    </p>
+    <div id="shock-list" class="space-y-3">
+      <div class="text-xs text-slate-400 animate-pulse">
+        Loading detector results...
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Early Warning Heatmap
+      </h3>
+      <span
+        class="text-[10px] font-black uppercase bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
+        >Top 12 Risks</span
+      >
+    </div>
+    <div id="heatmap-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="text-xs text-slate-400 animate-pulse">
+        Loading heatmap cells...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="mt-8 bg-white p-6 rounded-2xl border border-slate-200 panel-card hero-glow stagger-up"
+>
+  <div
+    class="flex flex-col md:flex-row justify-between md:items-center gap-3 mb-5"
+  >
+    <div>
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Guided Demo Scenario Runner
+      </h3>
+      <p class="text-xs text-slate-500">
+        One-click scripted flows for your presentation: safe, borderline, and
+        critical intervention journey.
+      </p>
+    </div>
+    <span
+      class="text-[10px] font-black uppercase bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full emphasis-pill"
+      >Presentation Mode</span
+    >
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+    <button
+      onclick="startDemoScenario('safe')"
+      class="text-left p-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition"
+    >
+      <p class="text-[10px] font-black uppercase text-emerald-700">
+        Scenario A
+      </p>
+      <p class="text-sm font-bold text-slate-800 mt-1">Safe Recovery Path</p>
+    </button>
+    <button
+      onclick="startDemoScenario('borderline')"
+      class="text-left p-4 rounded-xl border border-amber-200 bg-amber-50 hover:bg-amber-100 transition"
+    >
+      <p class="text-[10px] font-black uppercase text-amber-700">Scenario B</p>
+      <p class="text-sm font-bold text-slate-800 mt-1">
+        Borderline Stabilization
+      </p>
+    </button>
+    <button
+      onclick="startDemoScenario('critical')"
+      class="text-left p-4 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 transition"
+    >
+      <p class="text-[10px] font-black uppercase text-rose-700">Scenario C</p>
+      <p class="text-sm font-bold text-slate-800 mt-1">Critical Escalation</p>
+    </button>
+  </div>
+
+  <div id="demo-steps" class="space-y-2 text-xs text-slate-600"></div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Operational Quick Actions
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Command Shortcuts</span
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <button
+        onclick="loadView('audit')"
+        class="text-left p-4 rounded-xl bg-slate-50 border border-slate-200 hover:bg-cyan-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-cyan-700">Action 1</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Open Registry and Search
+        </p>
+      </button>
+      <button
+        onclick="loadView('forecaster')"
+        class="text-left p-4 rounded-xl bg-slate-50 border border-slate-200 hover:bg-cyan-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-cyan-700">Action 2</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Run Forecast and Planner
+        </p>
+      </button>
+      <button
+        onclick="loadView('reports')"
+        class="text-left p-4 rounded-xl bg-slate-50 border border-slate-200 hover:bg-cyan-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-cyan-700">Action 3</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Open Executive Impact Board
+        </p>
+      </button>
+      <button
+        onclick="downloadDeanReport()"
+        class="text-left p-4 rounded-xl bg-slate-50 border border-slate-200 hover:bg-cyan-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-cyan-700">Action 4</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Export Presentation PDF
+        </p>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-900 p-6 rounded-2xl border border-slate-700 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Live Activity Stream
+      </h3>
+      <span id="ops-timestamp" class="text-[10px] text-cyan-300 font-bold"
+        >--:--</span
+      >
+    </div>
+    <div id="live-activity-list" class="space-y-2">
+      <div class="text-xs text-slate-400 animate-pulse">
+        Loading operations feed...
+      </div>
+    </div>
+  </div>
+</div>

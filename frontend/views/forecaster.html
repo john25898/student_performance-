@@ -1,0 +1,626 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">
+      Predictive Outcome Forecaster
+    </h2>
+    <p class="section-subtitle mt-2">
+      Project final semester grades using historical and continuous assessment
+      metrics.
+    </p>
+  </div>
+  <span
+    class="bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm emphasis-pill"
+    >Objective 2</span
+  >
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Forecast Engine Online</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Counterfactual Planner Armed</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Advisor Brief Ready</span
+    >
+  </div>
+  <p class="text-xs text-cyan-800 font-bold mt-3">
+    Forecaster mission: convert current student metrics into actionable future
+    outcomes and safe-path intervention targets.
+  </p>
+</div>
+
+<div
+  class="bg-slate-900 p-8 rounded-2xl shadow-xl mb-8 text-white relative overflow-hidden panel-card-dark hero-glow"
+>
+  <div class="absolute top-0 right-0 p-8 opacity-10">
+    <svg
+      class="w-24 h-24"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+      ></path>
+    </svg>
+  </div>
+  <div class="relative z-10">
+    <h3 class="text-xl font-bold mb-2">Target Student Query</h3>
+    <p class="text-slate-400 text-sm mb-6">
+      Enter a Registration Number to run the forecasting algorithm.
+    </p>
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+      <input
+        type="text"
+        id="forecast-reg"
+        placeholder="e.g. CT201/111932/23"
+        class="flex-1 bg-slate-800 border-2 border-slate-700 p-4 rounded-xl text-white outline-none focus:border-cyan-500 font-mono uppercase"
+      />
+      <button
+        onclick="runForecast()"
+        id="forecast-btn"
+        class="bg-cyan-600 px-8 py-4 font-black rounded-xl hover:bg-cyan-500 transition shadow-lg text-white"
+      >
+        PROJECT OUTCOME
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-white p-4 rounded-2xl border border-slate-200 mb-8 panel-card stagger-up"
+>
+  <div class="flex items-center justify-between gap-3 flex-wrap">
+    <h4 class="text-xs font-black uppercase tracking-widest text-slate-700">
+      Forecaster Workflow
+    </h4>
+    <p id="flow-summary" class="text-[11px] text-slate-500 font-bold">
+      Start by loading a student profile.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-2 mt-3">
+    <div
+      id="flow-step-1"
+      class="p-2 rounded-lg border border-cyan-200 bg-cyan-50"
+    >
+      <p class="text-[10px] font-black text-cyan-700 uppercase">Step 1</p>
+      <p class="text-xs font-bold text-cyan-900 mt-1">Load Student</p>
+    </div>
+    <div
+      id="flow-step-2"
+      class="p-2 rounded-lg border border-slate-200 bg-slate-50"
+    >
+      <p class="text-[10px] font-black text-slate-500 uppercase">Step 2</p>
+      <p class="text-xs font-bold text-slate-700 mt-1">Review Baseline</p>
+    </div>
+    <div
+      id="flow-step-3"
+      class="p-2 rounded-lg border border-slate-200 bg-slate-50"
+    >
+      <p class="text-[10px] font-black text-slate-500 uppercase">Step 3</p>
+      <p class="text-xs font-bold text-slate-700 mt-1">Compare Scenarios</p>
+    </div>
+    <div
+      id="flow-step-4"
+      class="p-2 rounded-lg border border-slate-200 bg-slate-50"
+    >
+      <p class="text-[10px] font-black text-slate-500 uppercase">Step 4</p>
+      <p class="text-xs font-bold text-slate-700 mt-1">Run Action Plan</p>
+    </div>
+  </div>
+</div>
+
+<div id="forecast-results" class="hidden animate-fade space-y-8">
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Student Intelligence Snapshot
+      </h4>
+      <span
+        class="text-[10px] bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-black uppercase"
+      >
+        Full Context
+      </span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Department
+        </p>
+        <p id="fc-dept" class="text-sm font-black text-slate-800 mt-1">--</p>
+      </div>
+      <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">Program</p>
+        <p id="fc-program" class="text-sm font-black text-slate-800 mt-1">--</p>
+      </div>
+      <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Year of Study
+        </p>
+        <p id="fc-year" class="text-sm font-black text-slate-800 mt-1">--</p>
+      </div>
+      <div class="p-3 rounded-lg border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Current Risk
+        </p>
+        <p id="fc-risk-now" class="text-sm font-black text-red-600 mt-1">--</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row justify-between items-center border-l-4 border-l-cyan-500 panel-card stagger-up"
+  >
+    <div class="mb-4 md:mb-0">
+      <h4 class="text-xl font-black text-slate-800" id="fc-name">--</h4>
+      <p class="text-cyan-600 font-bold font-mono text-xs" id="fc-reg">--</p>
+    </div>
+    <div class="flex space-x-4 text-right">
+      <div>
+        <span
+          class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block"
+          >Engine</span
+        >
+        <span
+          class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-black uppercase"
+          >PyCaret ML</span
+        >
+      </div>
+      <div>
+        <span
+          class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block"
+          >Risk Confidence</span
+        >
+        <span class="text-sm font-black text-slate-700" id="fc-confidence"
+          >--%</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-800 p-6 rounded-2xl shadow-inner border border-slate-700 relative overflow-hidden panel-card-dark stagger-up"
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-sky-500"
+    ></div>
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-xs font-black text-slate-300 uppercase tracking-widest">
+        Live Feature Vector (Model Inputs)
+      </h4>
+      <span class="text-[10px] text-slate-500 font-mono"
+        >SELECT * FROM db.supabase</span
+      >
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-4 text-center">
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">
+          Raw CAT Score
+        </p>
+        <p class="text-lg font-black text-white" id="raw-cat">--</p>
+      </div>
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">Attendance</p>
+        <p class="text-lg font-black text-white" id="raw-att">--</p>
+      </div>
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">
+          Cumulative GPA
+        </p>
+        <p class="text-lg font-black text-white" id="raw-gpa">--</p>
+      </div>
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">
+          Past Failures
+        </p>
+        <p class="text-lg font-black text-red-400" id="raw-fail">--</p>
+      </div>
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">
+          Study Hrs/Wk
+        </p>
+        <p class="text-lg font-black text-white" id="raw-study">--</p>
+      </div>
+      <div
+        class="bg-slate-900 p-3 rounded-xl border border-slate-700 shadow-md"
+      >
+        <p class="text-[10px] text-slate-400 font-bold uppercase">
+          Active Credits
+        </p>
+        <p class="text-lg font-black text-white" id="raw-cred">--</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div
+      class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-center items-center text-center panel-card stagger-up"
+    >
+      <div
+        class="w-12 h-12 bg-slate-100 text-slate-500 rounded-full flex items-center justify-center mb-4"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+          ></path>
+        </svg>
+      </div>
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1"
+      >
+        Assessment Calculation
+      </h4>
+      <p class="text-4xl font-black text-slate-700 font-mono">
+        <span id="val-cat">--</span
+        ><span class="text-lg text-slate-300">/30</span>
+      </p>
+      <p class="text-xs text-slate-500 font-medium mt-3">
+        Scaled mathematically from Raw CAT.
+      </p>
+    </div>
+
+    <div
+      class="bg-white p-6 rounded-2xl shadow-md border-t-4 border-blue-500 flex flex-col justify-center items-center text-center transform scale-105 z-10 panel-card stagger-up"
+    >
+      <div
+        class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 shadow-inner"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          ></path>
+        </svg>
+      </div>
+      <h4
+        class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1"
+      >
+        Predicted Final Exam
+      </h4>
+      <p class="text-5xl font-black text-blue-600 font-mono">
+        <span id="val-exam">--</span
+        ><span class="text-xl text-blue-300">/70</span>
+      </p>
+      <p class="text-xs text-slate-500 font-medium mt-3">
+        Calculated via algorithm weights below.
+      </p>
+    </div>
+
+    <div
+      class="bg-slate-900 p-6 rounded-2xl shadow-xl flex flex-col justify-center items-center text-center relative overflow-hidden panel-card-dark stagger-up"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-blue-200 to-transparent"
+      ></div>
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 relative z-10"
+      >
+        Projected Final Grade
+      </h4>
+      <p class="text-7xl font-black text-white relative z-10" id="val-grade">
+        --
+      </p>
+      <p class="text-xs text-slate-400 font-medium mt-2 relative z-10">
+        Total Forecast:
+        <span id="val-total" class="font-bold text-white">--</span>/100
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 panel-card stagger-up"
+  >
+    <h4 class="text-sm font-black text-slate-800 mb-4">
+      Algorithm Weighting Distribution
+    </h4>
+    <p class="text-xs text-slate-500 mb-6">
+      The predictive engine applies heuristic penalties and multipliers based on
+      these historical metrics:
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div
+        class="p-4 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between"
+      >
+        <div>
+          <p class="text-[10px] font-bold text-slate-400 uppercase">
+            Attendance Weight
+          </p>
+          <p class="text-[10px] text-slate-500 mt-1">
+            60% of forecast baseline.
+          </p>
+        </div>
+        <p class="text-xl font-black text-slate-700" id="fac-att">--%</p>
+      </div>
+      <div
+        class="p-4 bg-slate-50 rounded-lg border border-slate-100 flex items-center justify-between"
+      >
+        <div>
+          <p class="text-[10px] font-bold text-slate-400 uppercase">
+            Historical GPA
+          </p>
+          <p class="text-[10px] text-slate-500 mt-1">
+            40% of forecast baseline.
+          </p>
+        </div>
+        <p class="text-xl font-black text-slate-700" id="fac-gpa">--</p>
+      </div>
+      <div
+        class="p-4 bg-red-50 rounded-lg border border-red-100 flex items-center justify-between"
+      >
+        <div>
+          <p class="text-[10px] font-bold text-red-400 uppercase">
+            Failures Penalty
+          </p>
+          <p class="text-[10px] text-red-500 mt-1">
+            -3 Marks per past failure.
+          </p>
+        </div>
+        <p class="text-xl font-black text-red-600" id="fac-fail">--</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-900 p-6 rounded-2xl shadow-xl border border-slate-700 text-white panel-card-dark hero-glow stagger-up"
+  >
+    <div
+      class="flex flex-col md:flex-row justify-between md:items-center gap-3 mb-5"
+    >
+      <div>
+        <h4 class="text-sm font-black uppercase tracking-widest">
+          Counterfactual Target Planner
+        </h4>
+        <p class="text-xs text-slate-300">
+          Compute the minimum intervention mix required to move into a safer
+          risk band.
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <select
+          id="cf-target-band"
+          class="bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-xs font-bold outline-none"
+        >
+          <option>Low</option>
+          <option selected>Moderate</option>
+          <option>High</option>
+        </select>
+        <button
+          onclick="runCounterfactualPlanner()"
+          class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest"
+        >
+          Run Planner
+        </button>
+      </div>
+    </div>
+
+    <p id="cf-narrative" class="text-xs text-slate-300 mb-4">
+      Select a target band and run the planner.
+    </p>
+    <div id="cf-plan" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+
+    <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-3" id="cf-feasibility">
+      <div class="p-3 rounded-xl border border-slate-600 bg-slate-800">
+        <p class="text-[10px] uppercase font-black text-slate-400">
+          Feasibility
+        </p>
+        <p
+          id="cf-feasibility-score"
+          class="text-xl font-black text-cyan-300 mt-1"
+        >
+          --
+        </p>
+        <p id="cf-feasibility-note" class="text-[10px] text-slate-400 mt-2">
+          Run planner to estimate implementation realism.
+        </p>
+      </div>
+      <div class="p-3 rounded-xl border border-slate-600 bg-slate-800">
+        <p class="text-[10px] uppercase font-black text-slate-400">
+          Priority Owner
+        </p>
+        <p id="cf-owner-focus" class="text-sm font-black text-white mt-2">--</p>
+      </div>
+      <div class="p-3 rounded-xl border border-slate-600 bg-slate-800">
+        <p class="text-[10px] uppercase font-black text-slate-400">
+          Risk Target Gap
+        </p>
+        <p id="cf-target-gap" class="text-xl font-black text-amber-300 mt-1">
+          --
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Scenario Comparator Lab
+      </h4>
+      <span
+        class="text-[10px] bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Experiment Mode</span
+      >
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="text-[10px] uppercase font-black text-slate-500"
+          >Attendance Target Change</label
+        >
+        <input
+          type="range"
+          id="cmp-att"
+          min="-20"
+          max="20"
+          value="0"
+          class="w-full accent-cyan-600"
+          oninput="updateComparatorLabels()"
+        />
+        <p class="text-xs font-bold text-slate-700">
+          New Change: <span id="cmp-att-label">0%</span>
+        </p>
+      </div>
+      <div>
+        <label class="text-[10px] uppercase font-black text-slate-500"
+          >GPA Target Change</label
+        >
+        <input
+          type="range"
+          id="cmp-gpa"
+          min="-1"
+          max="1"
+          step="0.1"
+          value="0"
+          class="w-full accent-cyan-600"
+          oninput="updateComparatorLabels()"
+        />
+        <p class="text-xs font-bold text-slate-700">
+          New Change: <span id="cmp-gpa-label">0.0</span>
+        </p>
+      </div>
+      <div>
+        <label class="text-[10px] uppercase font-black text-slate-500"
+          >Study Hours Change</label
+        >
+        <input
+          type="range"
+          id="cmp-study"
+          min="-5"
+          max="10"
+          value="0"
+          class="w-full accent-cyan-600"
+          oninput="updateComparatorLabels()"
+        />
+        <p class="text-xs font-bold text-slate-700">
+          New Change: <span id="cmp-study-label">0h</span>
+        </p>
+      </div>
+    </div>
+
+    <button
+      onclick="runScenarioComparator()"
+      class="bg-cyan-600 hover:bg-cyan-500 text-white px-5 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest"
+    >
+      Run Comparator
+    </button>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+      <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">Baseline</p>
+        <p class="text-lg font-black text-slate-800" id="cmp-base">Risk --%</p>
+      </div>
+      <div class="p-4 rounded-xl border border-cyan-200 bg-cyan-50">
+        <p class="text-[10px] uppercase font-black text-cyan-600">
+          Adjusted Scenario
+        </p>
+        <p class="text-lg font-black text-cyan-800" id="cmp-adjusted">
+          Risk --%
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500 mb-2">
+          Scenario Outcome Board
+        </p>
+        <div id="scenario-outcomes" class="space-y-2">
+          <div class="text-xs text-slate-400">
+            Run comparator to generate scenario board.
+          </div>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl border border-cyan-200 bg-cyan-50">
+        <p class="text-[10px] uppercase font-black text-cyan-700 mb-2">
+          Decision Brief
+        </p>
+        <p id="scenario-recommendation" class="text-xs text-cyan-900">
+          The system will explain the current risk issue and recommend the most
+          practical next move.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-5 p-4 rounded-xl border border-slate-200 bg-white">
+      <p class="text-[10px] uppercase font-black text-slate-500 mb-3">
+        Multi-Scenario Risk Curve
+      </p>
+      <div class="relative h-56">
+        <canvas id="forecastScenarioChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Real-time Intervention Pulse
+      </h4>
+      <span
+        class="text-[10px] bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+      >
+        Live Planner Feed
+      </span>
+    </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-3"
+      id="forecast-pulse-cards"
+    >
+      <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Recovery Probability
+        </p>
+        <p class="text-xl font-black text-slate-800 mt-1">--</p>
+      </div>
+      <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Earliest Stabilization
+        </p>
+        <p class="text-xl font-black text-slate-800 mt-1">--</p>
+      </div>
+      <div class="p-3 rounded-xl border border-slate-200 bg-slate-50">
+        <p class="text-[10px] uppercase font-black text-slate-500">
+          Advising Load Index
+        </p>
+        <p class="text-xl font-black text-slate-800 mt-1">--</p>
+      </div>
+    </div>
+  </div>
+</div>

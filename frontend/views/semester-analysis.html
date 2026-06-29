@@ -1,0 +1,167 @@
+<div class="mb-8 flex justify-between items-end flex-wrap gap-3">
+  <div>
+    <h2 class="text-3xl font-black section-title">Semester Analysis</h2>
+    <p class="section-subtitle mt-2">
+      Five-semester performance timeline with next-semester prediction.
+    </p>
+  </div>
+  <span
+    class="bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm flex items-center emphasis-pill"
+    >5 Semesters + Forecast</span
+  >
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Trend Intelligence</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Scope-aware View</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Next Semester Forecast</span
+    >
+  </div>
+  <p
+    id="semester-analysis-summary"
+    class="text-xs text-cyan-800 font-bold mt-3"
+  >
+    Syncing semester intelligence...
+  </p>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Pass Rate Trend
+      </h3>
+      <span
+        class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+        >History + Next</span
+      >
+    </div>
+    <div class="relative h-64">
+      <canvas id="semesterPassChart"></canvas>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Risk Proxy Trend
+      </h3>
+      <span
+        class="text-[10px] bg-red-100 text-red-700 px-3 py-1 rounded-full font-black uppercase"
+        >History + Next</span
+      >
+    </div>
+    <div class="relative h-64">
+      <canvas id="semesterRiskChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-5 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">
+      Predicted Pass Rate
+    </p>
+    <p
+      id="semester-next-pass"
+      class="text-4xl font-black text-emerald-600 mt-2"
+    >
+      --%
+    </p>
+    <p class="text-[11px] text-slate-500 mt-2">
+      Projected next-semester pass trend.
+    </p>
+  </div>
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-5 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">
+      Predicted Risk Proxy
+    </p>
+    <p id="semester-next-risk" class="text-4xl font-black text-red-600 mt-2">
+      --%
+    </p>
+    <p class="text-[11px] text-slate-500 mt-2">
+      Projected next-semester risk trend.
+    </p>
+  </div>
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-5 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Mode</p>
+    <p id="semester-view-mode" class="text-xl font-black text-slate-800 mt-2">
+      --
+    </p>
+    <p class="text-[11px] text-slate-500 mt-2">
+      CoD department scope or Dean all-departments scope.
+    </p>
+  </div>
+</div>
+
+<div
+  class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up mb-8"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+      Semester Matrix
+    </h3>
+    <span
+      id="semester-matrix-summary"
+      class="text-[10px] bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-black uppercase"
+      >Loading...</span
+    >
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs text-slate-600">
+      <thead class="bg-slate-50 uppercase font-black text-slate-400">
+        <tr>
+          <th class="px-3 py-2">Department</th>
+          <th class="px-3 py-2">Semester</th>
+          <th class="px-3 py-2 text-right">Attendance</th>
+          <th class="px-3 py-2 text-right">Score</th>
+          <th class="px-3 py-2 text-right">Pass Rate</th>
+          <th class="px-3 py-2 text-right">Risk Proxy</th>
+        </tr>
+      </thead>
+      <tbody id="semester-matrix-body" class="divide-y divide-slate-100">
+        <tr>
+          <td colspan="6" class="px-3 py-4 text-slate-400">
+            Loading semester matrix...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div
+  class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-sm font-black uppercase tracking-widest">
+      Department Forecast Spotlight
+    </h3>
+    <span
+      class="text-[10px] bg-cyan-500/20 text-cyan-200 px-3 py-1 rounded-full font-black uppercase"
+      >Dean Focus</span
+    >
+  </div>
+  <div
+    id="semester-forecast-spotlight"
+    class="space-y-2 text-xs text-slate-200"
+  >
+    <div class="text-slate-400">Loading forecast spotlight...</div>
+  </div>
+</div>

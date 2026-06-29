@@ -1,0 +1,566 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">
+      Dean's Strategic Analytics
+    </h2>
+    <p class="section-subtitle mt-2">
+      Macro-level performance tracking across the School of Computing.
+    </p>
+  </div>
+  <div class="flex space-x-4">
+    <span
+      class="bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm flex items-center emphasis-pill"
+      >Objective 4 & 5</span
+    >
+    <button
+      onclick="downloadDeanReport()"
+      class="bg-slate-900 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:bg-blue-600 transition shadow-lg flex items-center space-x-2"
+    >
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+        ></path>
+      </svg>
+      <span id="export-btn-text">Export PDF Report</span>
+    </button>
+  </div>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Executive Metrics Live</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>War Room Linked</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Impact Board Publishing</span
+    >
+  </div>
+  <p class="text-xs text-cyan-800 font-bold mt-3">
+    Reports mission: translate interventions into measurable departmental impact
+    for Dean-level decision making.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-8">
+  <button
+    onclick="loadView('impact')"
+    class="text-left p-4 rounded-2xl border border-slate-200 bg-white panel-card stagger-up hover:bg-blue-50 transition"
+  >
+    <p class="text-[10px] font-black uppercase text-blue-700">Board 01</p>
+    <p class="text-sm font-bold text-slate-800 mt-1">Impact Board</p>
+    <p class="text-[11px] text-slate-500 mt-1">
+      Before/after results and leadership memo.
+    </p>
+  </button>
+  <button
+    onclick="loadView('model-watch')"
+    class="text-left p-4 rounded-2xl border border-slate-200 bg-white panel-card stagger-up hover:bg-blue-50 transition"
+  >
+    <p class="text-[10px] font-black uppercase text-blue-700">Board 02</p>
+    <p class="text-sm font-bold text-slate-800 mt-1">Model Watch</p>
+    <p class="text-[11px] text-slate-500 mt-1">
+      Drift, fairness, and scenario sensitivity.
+    </p>
+  </button>
+  <button
+    onclick="loadView('war-room')"
+    class="text-left p-4 rounded-2xl border border-slate-200 bg-white panel-card stagger-up hover:bg-blue-50 transition"
+  >
+    <p class="text-[10px] font-black uppercase text-blue-700">Board 03</p>
+    <p class="text-sm font-bold text-slate-800 mt-1">War Room</p>
+    <p class="text-[11px] text-slate-500 mt-1">
+      Escalations, governance, and SLA pressure.
+    </p>
+  </button>
+  <button
+    onclick="loadView('dashboard')"
+    class="text-left p-4 rounded-2xl border border-slate-200 bg-white panel-card stagger-up hover:bg-blue-50 transition"
+  >
+    <p class="text-[10px] font-black uppercase text-blue-700">Board 04</p>
+    <p class="text-sm font-bold text-slate-800 mt-1">System Pulse</p>
+    <p class="text-[11px] text-slate-500 mt-1">
+      Campus-wide summary and live trend lens.
+    </p>
+  </button>
+</div>
+
+<div class="mb-8">
+  <button
+    onclick="loadView('briefing')"
+    class="w-full text-left p-5 rounded-2xl border border-blue-200 bg-blue-50 panel-card stagger-up hover:bg-blue-100 transition"
+  >
+    <div class="flex justify-between items-center gap-3 flex-wrap">
+      <div>
+        <p class="text-[10px] font-black uppercase text-blue-700">Board 05</p>
+        <p class="text-lg font-black text-slate-800 mt-1">
+          Executive Briefing Center
+        </p>
+        <p class="text-[11px] text-slate-600 mt-1">
+          Generate, refine, copy, and export the memo for boardroom delivery.
+        </p>
+      </div>
+      <span
+        class="text-[10px] font-black uppercase text-blue-700 bg-white px-3 py-1 rounded-full border border-blue-200"
+      >
+        New export hub
+      </span>
+    </div>
+  </button>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-700 uppercase tracking-widest">
+        Before vs After Impact
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Live KPI</span
+      >
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+      <div class="bg-slate-50 rounded-xl border border-slate-100 p-3">
+        <p class="text-[10px] uppercase font-black text-slate-400">Cases</p>
+        <p id="impact-total" class="text-2xl font-black text-slate-800">--</p>
+      </div>
+      <div class="bg-slate-50 rounded-xl border border-slate-100 p-3">
+        <p class="text-[10px] uppercase font-black text-slate-400">Resolved</p>
+        <p id="impact-resolved" class="text-2xl font-black text-green-600">
+          --
+        </p>
+      </div>
+      <div class="bg-slate-50 rounded-xl border border-slate-100 p-3">
+        <p class="text-[10px] uppercase font-black text-slate-400">Execution</p>
+        <p id="impact-efficiency" class="text-2xl font-black text-blue-600">
+          --%
+        </p>
+      </div>
+    </div>
+    <div class="bg-slate-900 rounded-xl p-4 text-white">
+      <div class="flex justify-between text-xs font-bold mb-2">
+        <span>Baseline Risk Proxy</span><span id="impact-baseline">--</span>
+      </div>
+      <div class="h-2 rounded bg-slate-700 mb-3">
+        <div
+          id="impact-baseline-bar"
+          class="h-2 rounded bg-red-500"
+          style="width: 0%"
+        ></div>
+      </div>
+      <div class="flex justify-between text-xs font-bold mb-2">
+        <span>Current Risk Proxy</span><span id="impact-current">--</span>
+      </div>
+      <div class="h-2 rounded bg-slate-700">
+        <div
+          id="impact-current-bar"
+          class="h-2 rounded bg-emerald-400"
+          style="width: 0%"
+        ></div>
+      </div>
+      <p id="impact-narrative" class="text-[10px] text-slate-300 mt-3">
+        Awaiting impact telemetry...
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-900 rounded-2xl shadow-xl border border-slate-700 p-6 text-white panel-card-dark hero-glow stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        War Room Mode
+      </h3>
+      <span
+        class="text-[10px] bg-red-500/20 text-red-200 px-3 py-1 rounded-full font-black uppercase"
+        >Priority Feed</span
+      >
+    </div>
+    <p id="warroom-headline" class="text-xs text-slate-300 mb-4">
+      Syncing tactical feed...
+    </p>
+    <div class="grid grid-cols-3 gap-3 mb-4">
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-center"
+      >
+        <p class="text-[10px] text-slate-400 uppercase font-bold">New</p>
+        <p id="lane-new" class="text-lg font-black">0</p>
+      </div>
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-center"
+      >
+        <p class="text-[10px] text-slate-400 uppercase font-bold">
+          In Progress
+        </p>
+        <p id="lane-progress" class="text-lg font-black">0</p>
+      </div>
+      <div
+        class="bg-slate-800 border border-slate-700 rounded-lg p-2 text-center"
+      >
+        <p class="text-[10px] text-slate-400 uppercase font-bold">Resolved</p>
+        <p id="lane-resolved" class="text-lg font-black">0</p>
+      </div>
+    </div>
+    <div id="warroom-cases" class="space-y-2"></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Policy Approval Gate
+      </h3>
+      <span
+        id="policy-gate-badge"
+        class="text-[10px] bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-black uppercase"
+        >Checking...</span
+      >
+    </div>
+    <p id="policy-gate-summary" class="text-xs text-slate-600 mb-3">
+      Evaluating model-health and fairness thresholds before policy rollout.
+    </p>
+    <div
+      id="policy-gate-reasons"
+      class="space-y-2 text-xs text-slate-600"
+    ></div>
+  </div>
+
+  <div
+    class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Department Contracts
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-500/20 text-cyan-200 px-3 py-1 rounded-full font-black uppercase"
+        >Auto Escalation</span
+      >
+    </div>
+    <div id="performance-contracts" class="space-y-2 text-xs text-slate-200">
+      <div class="text-slate-400">Loading contract compliance...</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Budget-to-Impact Planner
+      </h3>
+      <span
+        class="text-[10px] bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-black uppercase"
+        >Pass Lift / Cost</span
+      >
+    </div>
+    <div id="budget-impact-planner" class="space-y-2 text-xs text-slate-700">
+      <div class="text-slate-400">Loading budget planner...</div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Early-Warning Cohort Alerts
+      </h3>
+      <span
+        class="text-[10px] bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-black uppercase"
+        >Semester + Program</span
+      >
+    </div>
+    <div id="cohort-alerts" class="space-y-2 text-xs text-slate-700">
+      <div class="text-slate-400">Loading cohort alerts...</div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up mb-8"
+>
+  <div class="flex justify-between items-center mb-4 gap-3 flex-wrap">
+    <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+      Semester, Unit, Lecturer Correlation Matrix
+    </h3>
+    <span
+      id="correlation-summary"
+      class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+      >Syncing...</span
+    >
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs text-slate-600">
+      <thead class="bg-slate-50 uppercase font-black text-slate-400">
+        <tr>
+          <th class="px-3 py-2">Department</th>
+          <th class="px-3 py-2">Semester</th>
+          <th class="px-3 py-2">Unit</th>
+          <th class="px-3 py-2">Lecturer</th>
+          <th class="px-3 py-2 text-right">Attendance</th>
+          <th class="px-3 py-2 text-right">Pass Rate</th>
+          <th class="px-3 py-2 text-right">Risk Proxy</th>
+        </tr>
+      </thead>
+      <tbody id="correlation-matrix" class="divide-y divide-slate-100">
+        <tr>
+          <td colspan="7" class="px-3 py-4 text-slate-400">
+            Loading semester-unit-lecturer correlations...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Model Health Monitor
+      </h3>
+      <span
+        class="text-[10px] bg-red-100 text-red-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+      >
+        Trust Layer
+      </span>
+    </div>
+    <div id="model-health" class="space-y-3">
+      <div class="text-xs text-slate-400">Loading model drift telemetry...</div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Scenario Lab for Deans
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+      >
+        Board Simulator
+      </span>
+    </div>
+    <p id="scenario-lab-note" class="text-xs text-slate-500 mb-3">
+      Comparing baseline, moderate, and aggressive strategy outcomes.
+    </p>
+    <div class="relative h-64">
+      <canvas id="scenarioLabChart"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Cohort Equity Lens
+      </h3>
+      <span
+        class="text-[10px] bg-amber-500/20 text-amber-200 px-3 py-1 rounded-full font-black uppercase"
+      >
+        Fairness Check
+      </span>
+    </div>
+    <p id="equity-summary" class="text-xs text-slate-300 mb-3">
+      Scanning cohort fairness...
+    </p>
+    <div id="equity-lens" class="space-y-2"></div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        One-click Action Brief
+      </h3>
+      <button
+        onclick="generateExecutiveBrief()"
+        class="bg-slate-900 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-cyan-600 transition"
+      >
+        Generate Memo
+      </button>
+    </div>
+    <p id="memo-headline" class="text-xs text-slate-500 mb-3">
+      Generate an email-ready dean memo with risks, actions, impact, and
+      blockers.
+    </p>
+    <textarea
+      id="memo-content"
+      rows="10"
+      class="w-full border border-slate-200 rounded-xl p-3 text-xs font-mono text-slate-700"
+      placeholder="Memo will appear here..."
+    ></textarea>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Policy Pressure Simulator
+      </h3>
+      <span
+        class="text-[10px] bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Boardroom Tool</span
+      >
+    </div>
+    <label class="text-xs font-bold text-slate-600"
+      >Intervention intensity scale (<span id="policy-scale-label">50</span
+      >%)</label
+    >
+    <input
+      type="range"
+      id="policy-slider"
+      min="10"
+      max="100"
+      value="50"
+      class="w-full mt-2 accent-cyan-600"
+      oninput="runPolicyPressureSim()"
+    />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+      <div class="p-3 rounded-lg bg-slate-50 border border-slate-100">
+        <p class="text-[10px] uppercase font-black text-slate-400">
+          Projected Pass Rate Lift
+        </p>
+        <p id="policy-pass-lift" class="text-2xl font-black text-slate-800">
+          --%
+        </p>
+      </div>
+      <div class="p-3 rounded-lg bg-cyan-50 border border-cyan-100">
+        <p class="text-[10px] uppercase font-black text-cyan-600">
+          Projected Risk Reduction
+        </p>
+        <p id="policy-risk-cut" class="text-2xl font-black text-cyan-800">
+          --%
+        </p>
+      </div>
+    </div>
+    <p id="policy-summary" class="text-xs text-slate-600 mt-3">
+      Move the slider to simulate policy intensity impact.
+    </p>
+  </div>
+
+  <div
+    class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Department Spotlight
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-500/20 text-cyan-200 px-3 py-1 rounded-full font-black uppercase"
+        >Auto Narrative</span
+      >
+    </div>
+    <div id="dept-spotlight" class="space-y-3">
+      <div class="text-xs text-slate-400 animate-pulse">
+        Building spotlight insights...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="pdf-report-content" class="bg-slate-50 p-4 rounded-2xl panel-card">
+  <div class="text-center mb-8 pt-4">
+    <h1 class="text-2xl font-black text-slate-800 tracking-tighter uppercase">
+      Meru University of Science & Technology
+    </h1>
+    <p class="text-sm font-bold text-slate-500 uppercase tracking-widest mt-1">
+      School of Computing and Informatics (SCI)
+    </p>
+    <p class="text-xs font-bold text-blue-600 mt-2">
+      Official AI Academic Performance Report
+    </p>
+  </div>
+
+  <div
+    class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 html2pdf__page-break-avoid"
+  >
+    <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-200">
+      <h3
+        class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6"
+      >
+        Departmental Pass Rates
+      </h3>
+      <div class="relative h-72">
+        <canvas id="passRateChart"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-200">
+      <h3
+        class="text-sm font-black text-slate-400 uppercase tracking-widest mb-6"
+      >
+        Engagement vs. Performance
+      </h3>
+      <div class="relative h-72">
+        <canvas id="engagementChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden html2pdf__page-break-avoid"
+  >
+    <div
+      class="p-6 border-b border-slate-100 flex justify-between items-center"
+    >
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        SCI Metric Matrix
+      </h3>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm text-slate-600">
+        <thead
+          class="bg-slate-50 text-xs uppercase font-black text-slate-400 border-b border-slate-200"
+        >
+          <tr>
+            <th class="px-6 py-4">Department</th>
+            <th class="px-6 py-4 text-center">Avg Attendance</th>
+            <th class="px-6 py-4 text-center">Avg CAT Score</th>
+            <th class="px-6 py-4 text-center">Overall Pass Rate</th>
+          </tr>
+        </thead>
+        <tbody id="analytics-table-body" class="divide-y divide-slate-100">
+          <tr>
+            <td
+              colspan="4"
+              class="px-6 py-8 text-center text-slate-400 animate-pulse font-bold"
+            >
+              Fetching live curriculum data...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

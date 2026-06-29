@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pandas
+pycaret
+groq
+supabase
+africastalking
+requests
+python-dotenv

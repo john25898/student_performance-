@@ -1,0 +1,156 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">Model Watch Center</h2>
+    <p class="section-subtitle mt-2">
+      Monitor drift, fairness, and scenario sensitivity before leadership
+      decisions go out.
+    </p>
+  </div>
+  <span
+    class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm emphasis-pill"
+  >
+    Trust Layer
+  </span>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"><span class="pulse-dot"></span>Model Drift</span>
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Scenario Sensitivity</span
+    >
+    <span class="pulse-chip"><span class="pulse-dot"></span>Equity Check</span>
+  </div>
+  <p class="text-xs text-blue-800 font-bold mt-3">
+    This page explains whether the model is stable, fair, and still aligned to
+    live student behaviour.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Model Health Monitor
+      </h3>
+      <span
+        class="text-[10px] bg-red-100 text-red-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Trust Layer</span
+      >
+    </div>
+    <div id="model-health" class="space-y-3">
+      <div class="text-xs text-slate-400">Loading model drift telemetry...</div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Scenario Lab for Deans
+      </h3>
+      <span
+        class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+        >Board Simulator</span
+      >
+    </div>
+    <p id="scenario-lab-note" class="text-xs text-slate-500 mb-3">
+      Comparing baseline, moderate, and aggressive strategy outcomes.
+    </p>
+    <div class="relative h-64"><canvas id="scenarioLabChart"></canvas></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+  <div
+    class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Cohort Equity Lens
+      </h3>
+      <span
+        class="text-[10px] bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full font-black uppercase"
+        >Fairness Check</span
+      >
+    </div>
+    <p id="equity-summary" class="text-xs text-slate-300 mb-3">
+      Scanning cohort fairness...
+    </p>
+    <div id="equity-lens" class="space-y-2"></div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Decision Path
+      </h3>
+      <span
+        class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-black uppercase"
+        >Connected Flow</span
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <button
+        onclick="loadView('forecaster')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">
+          Open Forecaster
+        </p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Test a student-level intervention path
+        </p>
+      </button>
+      <button
+        onclick="loadView('impact')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">
+          Open Impact Board
+        </p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          See before/after evidence for leadership
+        </p>
+      </button>
+      <button
+        onclick="loadView('war-room')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">
+          Open War Room
+        </p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Check active escalations and governance
+        </p>
+      </button>
+      <button
+        onclick="loadView('reports')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">
+          Back to Hub
+        </p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Return to the dean summary board
+        </p>
+      </button>
+      <button
+        onclick="loadView('briefing')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition md:col-span-2"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">
+          Open Briefing
+        </p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Turn model findings into a leadership memo
+        </p>
+      </button>
+    </div>
+  </div>
+</div>

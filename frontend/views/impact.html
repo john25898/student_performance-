@@ -1,0 +1,202 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">Impact Operations Board</h2>
+    <p class="section-subtitle mt-2">
+      Track before-and-after outcome movement, leadership confidence, and the
+      evidence behind the numbers.
+    </p>
+  </div>
+  <span
+    class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm emphasis-pill"
+  >
+    Executive Impact
+  </span>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Before/After Telemetry</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Confidence Window</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Leadership Brief Ready</span
+    >
+  </div>
+  <p class="text-xs text-blue-800 font-bold mt-3">
+    This page turns intervention results into board-ready evidence and a clear
+    decision path.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-blue-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Total Cases</p>
+    <p id="impact-total" class="text-3xl font-black text-slate-800 mt-1">--</p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-emerald-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Resolved</p>
+    <p id="impact-resolved" class="text-3xl font-black text-slate-800 mt-1">
+      --
+    </p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-cyan-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">
+      Execution Efficiency
+    </p>
+    <p id="impact-efficiency" class="text-3xl font-black text-slate-800 mt-1">
+      --%
+    </p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-slate-400 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Confidence</p>
+    <p id="impact-confidence" class="text-3xl font-black text-slate-800 mt-1">
+      --%
+    </p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-slate-900 rounded-2xl shadow-xl border border-slate-700 p-6 text-white panel-card-dark hero-glow stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Before vs After Impact
+      </h3>
+      <span
+        class="text-[10px] bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full font-black uppercase"
+        >Live KPI</span
+      >
+    </div>
+    <div class="bg-slate-800 rounded-xl p-4 text-white">
+      <div class="flex justify-between text-xs font-bold mb-2">
+        <span>Baseline Risk Proxy</span><span id="impact-baseline">--</span>
+      </div>
+      <div class="h-2 rounded bg-slate-700 mb-3">
+        <div
+          id="impact-baseline-bar"
+          class="h-2 rounded bg-slate-400"
+          style="width: 0%"
+        ></div>
+      </div>
+      <div class="flex justify-between text-xs font-bold mb-2">
+        <span>Current Risk Proxy</span><span id="impact-current">--</span>
+      </div>
+      <div class="h-2 rounded bg-slate-700">
+        <div
+          id="impact-current-bar"
+          class="h-2 rounded bg-blue-500"
+          style="width: 0%"
+        ></div>
+      </div>
+      <p id="impact-narrative" class="text-[10px] text-slate-300 mt-3">
+        Awaiting impact telemetry...
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Trend View
+      </h3>
+      <span
+        id="impact-trend-note"
+        class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-black uppercase"
+        >Loading...</span
+      >
+    </div>
+    <div class="relative h-72"><canvas id="impact-trend-chart"></canvas></div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Leadership Memo
+      </h3>
+      <button
+        onclick="generateExecutiveBrief()"
+        class="bg-blue-700 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition"
+      >
+        Refresh Memo
+      </button>
+    </div>
+    <p id="memo-headline" class="text-xs text-slate-500 mb-3">
+      Generate an email-ready dean memo with risks, actions, impact, and
+      blockers.
+    </p>
+    <textarea
+      id="memo-content"
+      rows="12"
+      class="w-full border border-slate-200 rounded-xl p-3 text-xs font-mono text-slate-700"
+      placeholder="Memo will appear here..."
+    ></textarea>
+  </div>
+
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Decision Flow
+      </h3>
+      <span
+        class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+        >Connected</span
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <button
+        onclick="loadView('reports')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">Step 1</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Return to reports hub
+        </p>
+      </button>
+      <button
+        onclick="loadView('war-room')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">Step 2</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Review live escalation
+        </p>
+      </button>
+      <button
+        onclick="loadView('model-watch')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">Step 3</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">Check model health</p>
+      </button>
+      <button
+        onclick="loadView('briefing')"
+        class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition md:col-span-3"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-700">Step 4</p>
+        <p class="text-sm font-bold text-slate-800 mt-1">
+          Open executive briefing center
+        </p>
+      </button>
+    </div>
+  </div>
+</div>

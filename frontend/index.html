@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoD AI Command Center | Meru University</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --tone-ink: #1d2226;
+        --tone-muted: #5e6b77;
+        --tone-accent: #0a66c2;
+        --tone-accent-soft: #eaf3fb;
+        --tone-accent-deep: #004182;
+        --tone-danger: #dc2626;
+        --tone-success: #0a66c2;
+      }
+      body {
+        font-family: "Sora", sans-serif;
+        letter-spacing: -0.01em;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .sidebar-gradient {
+        background: linear-gradient(
+          180deg,
+          #0a66c2 0%,
+          #0a5bb0 62%,
+          #004182 100%
+        );
+      }
+      .risk-card:hover {
+        transform: translateY(-3px);
+        transition: 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+        cursor: pointer;
+        border-color: #3b82f6;
+      }
+      .animate-fade {
+        animation: fadeIn 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .stagger-up {
+        animation: cardRise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .panel-card {
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 8px 22px -16px rgba(15, 23, 42, 0.35);
+      }
+      .panel-card-dark {
+        border: 1px solid #334155;
+        box-shadow: 0 12px 28px -18px rgba(2, 6, 23, 0.8);
+      }
+      .section-title {
+        color: var(--tone-ink);
+        letter-spacing: -0.02em;
+      }
+      .section-subtitle {
+        color: var(--tone-muted);
+      }
+      .kpi-number {
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: -0.03em;
+      }
+      .emphasis-pill {
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: 0.08em;
+      }
+      .hero-glow {
+        box-shadow:
+          0 0 0 1px rgba(10, 102, 194, 0.12),
+          0 18px 36px -26px rgba(10, 102, 194, 0.35);
+      }
+      .app-atmosphere {
+        background:
+          radial-gradient(
+            1200px 420px at 85% -25%,
+            rgba(10, 102, 194, 0.14),
+            transparent 65%
+          ),
+          radial-gradient(
+            1100px 380px at -15% 110%,
+            rgba(55, 143, 233, 0.1),
+            transparent 65%
+          );
+      }
+      .nav-active {
+        background: rgba(255, 255, 255, 0.2);
+        border-left: 4px solid #dbeafe;
+        color: #ffffff !important;
+        border-radius: 0 0.6rem 0.6rem 0;
+      }
+
+      /* Normalize purple-heavy utilities into LinkedIn blue family. */
+      [class*="text-purple-"] {
+        color: #0a66c2 !important;
+      }
+      [class*="bg-purple-"] {
+        background-color: #eaf3fb !important;
+      }
+      [class*="from-purple-"] {
+        --tw-gradient-from: #bfdbfe var(--tw-gradient-from-position) !important;
+      }
+      [class*="to-purple-"] {
+        --tw-gradient-to: #eaf3fb var(--tw-gradient-to-position) !important;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes cardRise {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.99);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 h-screen overflow-hidden">
+    <div
+      id="auth-overlay"
+      class="fixed inset-0 bg-slate-900 z-50 flex flex-col justify-center items-center sidebar-gradient transition-opacity duration-500 relative overflow-y-auto px-4 py-8"
+    >
+      <div class="text-center mb-10">
+        <div
+          class="w-20 h-20 bg-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-2xl shadow-blue-500/50"
+        >
+          <svg
+            class="w-10 h-10 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            ></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl font-black tracking-tighter text-white">
+          MUST <span class="text-cyan-300">AI</span>
+        </h1>
+        <p
+          class="text-xs text-cyan-200 font-bold uppercase tracking-widest mt-2"
+        >
+          School of Computing Command Center
+        </p>
+      </div>
+
+      <div
+        class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md border border-slate-100 md:mb-0 mb-40"
+      >
+        <h2 class="text-xl font-black text-slate-800 mb-2">
+          Administrative Gateway
+        </h2>
+        <p class="text-slate-500 text-sm mb-8">
+          Select your role, then enter passcode.
+        </p>
+
+        <div
+          id="login-error"
+          class="hidden bg-red-50 text-red-600 border border-red-200 p-3 rounded-lg text-xs font-bold mb-6 text-center"
+        >
+          Invalid credentials.
+        </div>
+
+        <div class="space-y-5">
+          <div class="p-3 rounded-xl border border-blue-100 bg-blue-50">
+            <p class="text-[10px] uppercase font-black text-blue-700 tracking-widest">Selected Role</p>
+            <p id="selected-role-name" class="text-sm font-black text-slate-700 mt-1">None</p>
+          </div>
+
+          <div id="password-section" class="hidden space-y-4">
+            <div>
+              <label
+                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2"
+                >Passcode</label
+              >
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Enter your passcode"
+                class="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-xl outline-none focus:border-cyan-500 transition text-slate-800 font-bold"
+              />
+            </div>
+
+            <button
+              onclick="attemptLogin()"
+              id="login-btn"
+              class="w-full bg-cyan-600 text-white font-black py-4 rounded-xl hover:bg-cyan-500 shadow-lg shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-1"
+            >
+              AUTHENTICATE
+            </button>
+          </div>
+
+          <p id="role-hint" class="text-[11px] text-slate-500 font-semibold text-center">
+            Choose your role to continue.
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="role-buttons-main"
+        class="w-full max-w-md md:max-w-none md:w-80 md:absolute md:bottom-6 md:right-6 rounded-2xl border border-blue-400/35 bg-slate-900/80 backdrop-blur-md p-4 shadow-xl"
+      >
+        <p class="text-[10px] font-black text-blue-200 uppercase tracking-widest">
+          Quick Role Access
+        </p>
+        <p class="text-[11px] text-slate-300 mt-1 mb-3 font-semibold">
+          Select your portal, then enter the passcode.
+        </p>
+        <div class="space-y-2">
+          <button
+            type="button"
+            id="role-btn-cod_cs-main"
+            onclick="selectLoginRole('cod_cs')"
+            class="role-btn w-full px-3 py-2.5 rounded-xl border-2 border-slate-700 text-slate-100 bg-slate-800/70 text-xs font-black uppercase tracking-wide hover:border-blue-300 hover:text-blue-100 transition text-left"
+          >
+            CoD - Computer Science
+          </button>
+          <button
+            type="button"
+            id="role-btn-cod_it-main"
+            onclick="selectLoginRole('cod_it')"
+            class="role-btn w-full px-3 py-2.5 rounded-xl border-2 border-slate-700 text-slate-100 bg-slate-800/70 text-xs font-black uppercase tracking-wide hover:border-blue-300 hover:text-blue-100 transition text-left"
+          >
+            CoD - Information Technology
+          </button>
+          <button
+            type="button"
+            id="role-btn-cod_ims-main"
+            onclick="selectLoginRole('cod_ims')"
+            class="role-btn w-full px-3 py-2.5 rounded-xl border-2 border-slate-700 text-slate-100 bg-slate-800/70 text-xs font-black uppercase tracking-wide hover:border-blue-300 hover:text-blue-100 transition text-left"
+          >
+            CoD - Info & Media Studies
+          </button>
+          <button
+            type="button"
+            id="role-btn-dean-main"
+            onclick="selectLoginRole('dean')"
+            class="role-btn w-full px-3 py-2.5 rounded-xl border-2 border-slate-700 text-slate-100 bg-slate-800/70 text-xs font-black uppercase tracking-wide hover:border-blue-300 hover:text-blue-100 transition text-left"
+          >
+            Dean Portal
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div id="app-layout" class="hidden flex h-screen w-full">
+    <div class="w-72 sidebar-gradient text-white flex flex-col p-6 shadow-2xl">
+      <div class="mb-10">
+        <h1 class="text-2xl font-black tracking-tighter text-white">
+          MUST <span class="text-cyan-300">AI</span>
+        </h1>
+        <p
+          class="text-[10px] text-slate-400 font-bold uppercase tracking-widest"
+        >
+          School of Computing
+        </p>
+      </div>
+
+      <nav class="space-y-4 flex-1" id="nav-menu">
+        <div
+          id="nav-dashboard"
+          class="nav-active p-3 rounded-r cursor-pointer hover:bg-cyan-600/30 transition"
+          onclick="loadView('dashboard')"
+        >
+          <a class="block font-bold pointer-events-none"
+            >Intelligence Dashboard</a
+          >
+        </div>
+        <a
+          id="nav-audit"
+          href="#"
+          onclick="loadView('audit')"
+          class="block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Student Risk Registry</a
+        >
+        <a
+          id="nav-forecast"
+          href="#"
+          onclick="loadView('forecaster')"
+          class="block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Performance Forecaster</a
+        >
+        <a
+          id="nav-reports"
+          href="#"
+          onclick="loadView('reports')"
+          class="block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Strategic Reports</a
+        >
+        <a
+          id="nav-semester-analysis"
+          href="#"
+          onclick="loadView('semester-analysis')"
+          class="block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Semester Analysis</a
+        >
+        <a
+          id="nav-impact"
+          href="#"
+          onclick="loadView('impact')"
+          class="hidden block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Impact Board</a
+        >
+        <a
+          id="nav-model-watch"
+          href="#"
+          onclick="loadView('model-watch')"
+          class="hidden block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Model Watch</a
+        >
+        <a
+          id="nav-war-room"
+          href="#"
+          onclick="loadView('war-room')"
+          class="hidden block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >War Room</a
+        >
+        <a
+          id="nav-briefing"
+          href="#"
+          onclick="loadView('briefing')"
+          class="hidden block p-3 text-slate-400 hover:text-white transition cursor-pointer"
+          >Briefing Center</a
+        >
+      </nav>
+
+      <div
+        class="bg-slate-800/50 p-4 rounded-xl text-xs border border-slate-700"
+      >
+        <p class="text-slate-500 mb-1">Composite Engine Status:</p>
+        <div class="flex items-center text-cyan-300 font-mono">
+          <span
+            class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"
+          ></span>
+          PYCARET + GROQ LIVE
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1 flex flex-col overflow-y-auto">
+      <header
+        class="bg-white p-6 shadow-sm flex justify-between items-center border-b sticky top-0 z-10"
+      >
+        <div>
+          <h2 id="header-title" class="text-xl font-bold text-slate-800">
+            Administrative Monitor
+          </h2>
+          <p id="header-subtitle" class="text-xs text-slate-500">
+            Real-time tracking of Student Attendance vs. CAT Performance
+          </p>
+        </div>
+        <div class="flex items-center space-x-6">
+          <div
+            id="notif-bell"
+            class="relative cursor-pointer hover:scale-105 transition-transform"
+            onclick="openNotificationsPage()"
+            title="Open Notifications Center"
+          >
+            <span
+              class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold shadow-lg"
+              id="alert-count"
+              >0</span
+            >
+            <svg
+              class="w-6 h-6 text-slate-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              ></path>
+            </svg>
+          </div>
+          <div
+            id="user-role-badge"
+            class="h-10 px-4 bg-cyan-100 rounded-full flex items-center justify-center text-cyan-700 font-bold border-2 border-cyan-200 uppercase text-xs"
+          >
+            Lock
+          </div>
+          <button
+            onclick="logout()"
+            class="text-xs text-slate-400 hover:text-red-500 transition font-bold"
+          >
+            Log Out
+          </button>
+        </div>
+      </header>
+
+      <main
+        id="app-content"
+        class="p-8 space-y-8 max-w-6xl mx-auto w-full app-atmosphere"
+      ></main>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

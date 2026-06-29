@@ -1,0 +1,250 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">Executive Briefing Center</h2>
+    <p class="section-subtitle mt-2">
+      A boardroom-ready export space for memos, evidence, and leadership
+      decisions.
+    </p>
+  </div>
+  <span
+    class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm emphasis-pill"
+  >
+    Export Hub
+  </span>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Memo Generation</span
+    >
+    <span class="pulse-chip"><span class="pulse-dot"></span>PDF Export</span>
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Leadership Snapshot</span
+    >
+  </div>
+  <p class="text-xs text-blue-800 font-bold mt-3">
+    Use this page to prepare a clean executive narrative, export it, and move
+    directly back into the supporting boards.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-blue-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Memo Status</p>
+    <p id="briefing-headline" class="text-lg font-black text-slate-800 mt-1">
+      Loading...
+    </p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-emerald-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Subject Line</p>
+    <p id="briefing-subject" class="text-sm font-black text-slate-800 mt-1">
+      --
+    </p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-cyan-500 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Tone</p>
+    <p id="briefing-tone-badge" class="text-sm font-black text-slate-800 mt-1">
+      Leadership-ready
+    </p>
+  </div>
+  <div
+    class="bg-white p-4 rounded-2xl border-t-4 border-slate-400 panel-card stagger-up"
+  >
+    <p class="text-[10px] uppercase font-black text-slate-400">Export Mode</p>
+    <p class="text-sm font-black text-slate-800 mt-1">PDF + Copy</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Briefing Memo
+      </h3>
+      <span
+        class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+        >Living Draft</span
+      >
+    </div>
+    <p id="briefing-copy-status" class="text-xs text-slate-500 mb-3">
+      Loading executive memo...
+    </p>
+    <textarea
+      id="briefing-memo"
+      rows="18"
+      class="w-full border border-slate-200 rounded-xl p-3 text-xs font-mono text-slate-700 bg-slate-50"
+      placeholder="Memo will appear here..."
+    ></textarea>
+    <div class="flex flex-wrap gap-2 mt-4">
+      <button
+        onclick="downloadDeanReport()"
+        class="px-4 py-2 rounded-lg bg-blue-700 text-white text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition"
+      >
+        Export PDF
+      </button>
+      <button
+        onclick="copyExecutiveMemo()"
+        class="px-4 py-2 rounded-lg bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-slate-700 transition"
+      >
+        Copy Memo
+      </button>
+      <button
+        onclick="generateExecutiveBrief()"
+        class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 text-[10px] font-black uppercase tracking-widest hover:bg-blue-50 transition"
+      >
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <div class="space-y-6">
+    <div
+      class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+          Leadership Snapshot
+        </h3>
+        <span
+          class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-black uppercase"
+          >Live Data</span
+        >
+      </div>
+      <div
+        id="briefing-snapshot"
+        class="grid grid-cols-1 md:grid-cols-2 gap-3"
+      ></div>
+    </div>
+
+    <div
+      class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+    >
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+          Connected Boards
+        </h3>
+        <span
+          class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+          >One Flow</span
+        >
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <button
+          onclick="loadView('impact')"
+          class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+        >
+          <p class="text-[10px] font-black uppercase text-blue-700">
+            Evidence Board
+          </p>
+          <p class="text-sm font-bold text-slate-800 mt-1">
+            Impact and confidence story
+          </p>
+        </button>
+        <button
+          onclick="loadView('war-room')"
+          class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+        >
+          <p class="text-[10px] font-black uppercase text-blue-700">
+            Operations Board
+          </p>
+          <p class="text-sm font-bold text-slate-800 mt-1">
+            Escalation and SLA review
+          </p>
+        </button>
+        <button
+          onclick="loadView('model-watch')"
+          class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+        >
+          <p class="text-[10px] font-black uppercase text-blue-700">
+            Trust Board
+          </p>
+          <p class="text-sm font-bold text-slate-800 mt-1">
+            Drift and fairness review
+          </p>
+        </button>
+        <button
+          onclick="downloadDeanReport()"
+          class="p-4 rounded-xl border border-slate-200 bg-slate-50 text-left hover:bg-blue-50 transition"
+        >
+          <p class="text-[10px] font-black uppercase text-blue-700">Export</p>
+          <p class="text-sm font-bold text-slate-800 mt-1">
+            Generate PDF package
+          </p>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+  <div
+    class="bg-white rounded-2xl border border-slate-200 p-6 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Impact Trend
+      </h3>
+      <span
+        class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-black uppercase"
+        >Board Confidence</span
+      >
+    </div>
+    <p id="impact-trend-note" class="text-xs text-slate-500 mb-3">
+      Loading trend...
+    </p>
+    <div class="relative h-72"><canvas id="impact-trend-chart"></canvas></div>
+  </div>
+
+  <div
+    class="bg-slate-900 rounded-2xl border border-slate-700 p-6 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Briefing Flow
+      </h3>
+      <span
+        class="text-[10px] bg-blue-500/20 text-blue-200 px-3 py-1 rounded-full font-black uppercase"
+        >Execution Ready</span
+      >
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <button
+        onclick="loadView('reports')"
+        class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-left hover:bg-slate-700 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-300">Step 1</p>
+        <p class="text-sm font-bold text-white mt-1">Open reports hub</p>
+      </button>
+      <button
+        onclick="loadView('impact')"
+        class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-left hover:bg-slate-700 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-300">Step 2</p>
+        <p class="text-sm font-bold text-white mt-1">Review evidence board</p>
+      </button>
+      <button
+        onclick="loadView('dashboard')"
+        class="p-4 rounded-xl border border-slate-700 bg-slate-800 text-left hover:bg-slate-700 transition"
+      >
+        <p class="text-[10px] font-black uppercase text-blue-300">Step 3</p>
+        <p class="text-sm font-bold text-white mt-1">Return to system pulse</p>
+      </button>
+    </div>
+    <div class="mt-5 p-4 rounded-xl border border-slate-700 bg-slate-800">
+      <p class="text-[10px] font-black uppercase text-slate-400">How to use</p>
+      <p class="text-xs text-slate-300 mt-2">
+        Refresh the memo, export the PDF, then move into the impact board or war
+        room for supporting evidence before presenting.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="mb-8 flex justify-between items-end">
+  <div>
+    <h2 class="text-3xl font-black section-title">
+      Notifications Command Center
+    </h2>
+    <p class="section-subtitle mt-2">
+      Real-time operations alerts across workflow pressure, SLA risk, model
+      drift, and governance events.
+    </p>
+  </div>
+  <span
+    class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-sm emphasis-pill"
+    >Live Feed</span
+  >
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Workflow Alerts</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>SLA Breach Signals</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Governance Events</span
+    >
+  </div>
+  <p class="text-xs text-blue-800 font-bold mt-3">
+    Bell notifications are now promoted into a full-page operations feed for
+    easier triage during live demos.
+  </p>
+</div>
+
+<div
+  class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+      Real-time Notification Feed
+    </h3>
+    <button
+      onclick="refreshNotificationsPage()"
+      class="bg-blue-700 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition"
+    >
+      Refresh Now
+    </button>
+  </div>
+
+  <p id="notifications-summary" class="text-xs text-slate-500 mb-4">
+    Loading notifications...
+  </p>
+
+  <div id="notifications-feed" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="text-xs text-slate-400">
+      Connecting to live notification stream...
+    </div>
+  </div>
+</div>

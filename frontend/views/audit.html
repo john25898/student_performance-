@@ -1,0 +1,763 @@
+<div
+  id="alert-banner"
+  class="bg-white border-l-8 border-red-600 p-6 rounded-xl shadow-lg flex items-center justify-between mb-8 panel-card hero-glow"
+>
+  <div>
+    <h3 class="text-red-600 font-black text-lg">CRITICAL DEPARTMENTAL ALERT</h3>
+    <p id="alert-text" class="text-slate-600 text-sm">
+      Scanning database for active risk correlations...
+    </p>
+  </div>
+  <div class="text-right">
+    <span class="text-xs font-bold text-slate-400 block uppercase"
+      >Objective 1 Status</span
+    >
+    <span class="text-sm font-bold text-green-600">Active Monitoring</span>
+  </div>
+</div>
+
+<div class="page-hero rounded-2xl p-4 mb-8 panel-card stagger-up">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Registry Scan Active</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Digital Twin Linked</span
+    >
+    <span class="pulse-chip"
+      ><span class="pulse-dot"></span>Escalation Radar Tracking</span
+    >
+  </div>
+  <p class="text-xs text-cyan-800 font-bold mt-3">
+    Registry mission: find high-risk learners fast, assign interventions, and
+    close the loop through accountable case execution.
+  </p>
+</div>
+
+<div
+  class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+  id="course-container"
+></div>
+
+<div
+  class="bg-white p-6 rounded-2xl border border-slate-200 mb-8 panel-card stagger-up"
+>
+  <div
+    class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4"
+  >
+    <div>
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Academic Integrity Watch
+      </h3>
+      <p class="text-xs text-slate-500">
+        Suspicious mark-spread detector for potential exam theft patterns.
+      </p>
+    </div>
+    <span
+      id="integrity-summary"
+      class="text-[10px] bg-red-100 text-red-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+    >
+      Scanning...
+    </span>
+  </div>
+  <div id="integrity-watch-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="text-xs text-slate-400">Loading integrity watchlist...</div>
+  </div>
+</div>
+<hr class="border-slate-200 mb-12" />
+
+<div
+  class="bg-slate-900 p-8 rounded-2xl shadow-xl mb-8 text-white relative overflow-hidden panel-card-dark"
+>
+  <div class="absolute top-0 right-0 p-8 opacity-10">
+    <svg
+      class="w-24 h-24"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+      ></path>
+    </svg>
+  </div>
+  <div class="relative z-10">
+    <h3 class="text-xl font-bold mb-2">Live Registry Search</h3>
+    <p class="text-slate-400 text-sm mb-6">
+      Pull live academic metrics directly from the Supabase core.
+    </p>
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+      <input
+        type="text"
+        id="search-reg"
+        placeholder="e.g. CT201/111932/23"
+        class="flex-1 bg-slate-800 border-2 border-slate-700 p-4 rounded-xl text-white outline-none focus:border-cyan-500 font-mono uppercase"
+      />
+      <button
+        onclick="searchStudentDB()"
+        id="search-btn"
+        class="bg-cyan-600 px-8 py-4 font-black rounded-xl hover:bg-cyan-500 transition shadow-lg text-white"
+      >
+        SEARCH REGISTRY
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  id="student-profile-card"
+  class="hidden animate-fade bg-white p-6 rounded-2xl border border-slate-200 mb-8 flex items-center justify-between border-l-4 border-l-blue-500 panel-card"
+>
+  <div>
+    <h4 class="text-2xl font-black text-slate-800" id="prof-name">--</h4>
+    <p class="text-cyan-600 font-bold font-mono text-sm" id="prof-reg">--</p>
+  </div>
+  <div class="text-right">
+    <p class="text-slate-500 text-sm font-bold uppercase" id="prof-dept">--</p>
+    <p class="text-slate-400 text-xs" id="prof-prog">--</p>
+  </div>
+</div>
+
+<div
+  id="digital-twin-card"
+  class="hidden bg-white p-8 rounded-2xl border border-slate-200 mb-8 panel-card"
+>
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h3 class="text-xl font-black text-slate-800">Student Digital Twin</h3>
+      <p class="text-xs text-slate-500 font-bold">
+        Live trajectory, explainability factors, and intervention pack.
+      </p>
+    </div>
+    <button
+      onclick="downloadCaseBrief()"
+      class="bg-slate-900 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition"
+    >
+      One Click Case Brief
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4">
+      <p class="text-[10px] font-black text-slate-400 uppercase">Risk Band</p>
+      <p id="twin-risk-band" class="text-xl font-black text-slate-800 mt-1">
+        --
+      </p>
+    </div>
+    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4">
+      <p class="text-[10px] font-black text-slate-400 uppercase">
+        Risk Probability
+      </p>
+      <p id="twin-risk-prob" class="text-xl font-black text-red-600 mt-1">
+        --%
+      </p>
+    </div>
+    <div class="bg-slate-50 border border-slate-100 rounded-xl p-4">
+      <p class="text-[10px] font-black text-slate-400 uppercase">
+        Escalation Level
+      </p>
+      <p id="twin-escalation" class="text-sm font-black text-slate-700 mt-2">
+        --
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div>
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3"
+      >
+        Top Risk Drivers
+      </h4>
+      <div id="twin-factors" class="space-y-3"></div>
+    </div>
+    <div>
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3"
+      >
+        Recommended Intervention Pack
+      </h4>
+      <div id="twin-actions" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <h4
+      class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3"
+    >
+      Academic Trajectory Timeline
+    </h4>
+    <div
+      id="twin-trajectory"
+      class="grid grid-cols-1 md:grid-cols-3 gap-3"
+    ></div>
+  </div>
+
+  <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3"
+      >
+        Explainability Panel v2: Top 3 Reasons
+      </h4>
+      <div id="explainability-v2-reasons" class="space-y-2">
+        <div class="text-xs text-slate-400">
+          Waiting for student selection...
+        </div>
+      </div>
+    </div>
+    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+      <h4
+        class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3"
+      >
+        What Changed Since Last Review
+      </h4>
+      <div id="explainability-v2-changes" class="space-y-2">
+        <div class="text-xs text-slate-400">
+          No previous review snapshot yet.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-white p-6 rounded-2xl border border-slate-200 mb-8 panel-card stagger-up"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+      Intervention ROI Scorecard
+    </h3>
+    <span
+      class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+    >
+      Benefit vs Effort
+    </span>
+  </div>
+  <p class="text-xs text-slate-500 mb-3">
+    Ranked interventions by expected pass-rate lift, risk-drop, confidence, and
+    time-to-impact.
+  </p>
+  <div
+    id="roi-story"
+    class="mb-4 p-4 rounded-xl border border-blue-100 bg-blue-50 text-xs text-blue-900"
+  >
+    ROI explainer: Loading best intervention narrative...
+  </div>
+  <div id="roi-scorecard" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="text-xs text-slate-400">
+      Loading intervention ROI scorecard...
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-white p-6 rounded-2xl border border-slate-200 mb-8 panel-card stagger-up"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+      Advisor Notes Vault
+    </h3>
+    <span
+      class="text-[10px] bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full font-black uppercase emphasis-pill"
+      >Auto-Saved</span
+    >
+  </div>
+  <textarea
+    id="advisor-notes"
+    rows="4"
+    class="w-full border border-slate-200 rounded-xl p-3 text-sm outline-none focus:border-cyan-500"
+    placeholder="Capture advising notes, commitments, and follow-up outcomes..."
+  ></textarea>
+  <div class="flex flex-wrap gap-2 mt-3">
+    <button
+      onclick="applyPlaybookTemplate('attendance')"
+      class="px-3 py-2 text-[10px] font-black uppercase bg-amber-100 text-amber-700 rounded-lg"
+    >
+      Attendance Recovery Template
+    </button>
+    <button
+      onclick="applyPlaybookTemplate('remedial')"
+      class="px-3 py-2 text-[10px] font-black uppercase bg-blue-100 text-blue-700 rounded-lg"
+    >
+      Remedial Coaching Template
+    </button>
+    <button
+      onclick="applyPlaybookTemplate('critical')"
+      class="px-3 py-2 text-[10px] font-black uppercase bg-red-100 text-red-700 rounded-lg"
+    >
+      Critical Escalation Template
+    </button>
+    <button
+      onclick="saveAdvisorNotes()"
+      class="px-3 py-2 text-[10px] font-black uppercase bg-slate-900 text-white rounded-lg"
+    >
+      Save Notes
+    </button>
+  </div>
+  <p id="notes-status" class="text-xs text-slate-500 mt-2">
+    Notes are linked to the currently selected student registration number.
+  </p>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Student Timeline Casebook
+      </h3>
+      <span
+        id="casebook-summary"
+        class="text-[10px] bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-black uppercase"
+        >Select Student</span
+      >
+    </div>
+    <div id="timeline-casebook" class="space-y-2 text-xs text-slate-600">
+      <div class="text-slate-400">
+        Search a student to load timeline casebook.
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-slate-900 p-6 rounded-2xl border border-slate-700 panel-card-dark hero-glow stagger-up text-white"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black uppercase tracking-widest">
+        Advisor Workload Balancer
+      </h3>
+      <span
+        class="text-[10px] bg-cyan-500/20 text-cyan-200 px-3 py-1 rounded-full font-black uppercase"
+        >Auto Assignment</span
+      >
+    </div>
+    <div id="advisor-workload" class="space-y-2 text-xs text-slate-200">
+      <div class="text-slate-400">Loading advisor workload map...</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Intervention Playbook Scoring
+      </h3>
+      <span
+        class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-black uppercase"
+        >Effectiveness Rank</span
+      >
+    </div>
+    <div id="playbook-scoring" class="space-y-2 text-xs text-slate-600">
+      <div class="text-slate-400">Loading playbook scoring...</div>
+    </div>
+  </div>
+
+  <div
+    class="bg-white p-6 rounded-2xl border border-slate-200 panel-card stagger-up"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-sm font-black text-slate-800 uppercase tracking-widest">
+        Parent/Guardian Communication
+      </h3>
+      <span
+        class="text-[10px] bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-black uppercase"
+        >Consent Trail</span
+      >
+    </div>
+    <p id="guardian-summary" class="text-xs text-slate-500 mb-2">
+      Select student to generate guardian template.
+    </p>
+    <div
+      id="guardian-workflow"
+      class="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-xl p-3 whitespace-pre-wrap"
+    >
+      Guardian template appears here after student search.
+    </div>
+  </div>
+</div>
+
+<div
+  class="bg-slate-900 p-8 rounded-2xl shadow-xl mb-8 text-white border border-slate-700 panel-card-dark hero-glow"
+>
+  <div
+    class="flex flex-col md:flex-row justify-between md:items-center gap-3 mb-6"
+  >
+    <div>
+      <h3 class="text-xl font-black tracking-tight">
+        Intervention Operations Command Board
+      </h3>
+      <p class="text-xs text-slate-300">
+        Closed-loop execution tracker with escalation visibility.
+      </p>
+    </div>
+    <button
+      onclick="refreshWorkflowBoard()"
+      class="bg-white text-slate-900 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-blue-100 transition"
+    >
+      Refresh Board
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 mb-6">
+    <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+      <p class="text-[10px] font-black uppercase text-slate-400 mb-3">
+        New Cases
+      </p>
+      <div id="queue-new" class="space-y-3"></div>
+    </div>
+    <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+      <p class="text-[10px] font-black uppercase text-slate-400 mb-3">
+        In Progress
+      </p>
+      <div id="queue-progress" class="space-y-3"></div>
+    </div>
+    <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+      <p class="text-[10px] font-black uppercase text-slate-400 mb-3">
+        Resolved
+      </p>
+      <div id="queue-resolved" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+    <div class="flex justify-between items-center mb-3">
+      <p class="text-[10px] font-black uppercase text-slate-400">
+        Escalation Radar
+      </p>
+      <span id="escalation-summary" class="text-[10px] font-bold text-red-300"
+        >Scanning...</span
+      >
+    </div>
+    <div
+      id="escalation-list"
+      class="grid grid-cols-1 md:grid-cols-2 gap-3"
+    ></div>
+  </div>
+
+  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 mt-4">
+    <div class="flex justify-between items-center mb-3">
+      <p class="text-[10px] font-black uppercase text-slate-400">
+        Governance and Audit Trail
+      </p>
+      <span id="governance-summary" class="text-[10px] font-bold text-cyan-300"
+        >Syncing ledger...</span
+      >
+    </div>
+    <div id="governance-trail" class="space-y-2"></div>
+  </div>
+
+  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 mt-4">
+    <div class="flex justify-between items-center mb-3">
+      <p class="text-[10px] font-black uppercase text-slate-400">
+        Intervention Evidence Tracker
+      </p>
+      <span id="evidence-summary" class="text-[10px] font-bold text-green-300"
+        >Awaiting case selection...</span
+      >
+    </div>
+    <div
+      id="intervention-evidence"
+      class="grid grid-cols-1 md:grid-cols-2 gap-3"
+    ></div>
+  </div>
+
+  <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 mt-4">
+    <div class="flex justify-between items-center mb-3">
+      <p class="text-[10px] font-black uppercase text-slate-400">
+        SLA and Escalation Intelligence
+      </p>
+      <span id="sla-summary" class="text-[10px] font-bold text-amber-300"
+        >Monitoring...</span
+      >
+    </div>
+    <div
+      id="sla-intelligence"
+      class="grid grid-cols-1 md:grid-cols-2 gap-3"
+    ></div>
+  </div>
+</div>
+
+<div
+  class="bg-white p-8 rounded-2xl shadow-xl border border-slate-200 mb-8 panel-card"
+>
+  <div class="flex justify-between items-center mb-8">
+    <h3 class="text-xl font-bold text-slate-800">
+      Calculated Academic Metrics
+    </h3>
+    <span
+      class="text-[10px] bg-slate-100 px-3 py-1 rounded-full font-bold text-slate-500 uppercase tracking-widest"
+      >Editable / Simulator</span
+    >
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="space-y-1">
+      <label class="text-[10px] font-bold text-slate-400 uppercase"
+        >Current GPA</label
+      ><input
+        type="number"
+        id="GPA"
+        value=""
+        step="0.1"
+        class="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 outline-none focus:border-blue-500 transition font-mono font-bold text-slate-700"
+      />
+    </div>
+    <div class="space-y-1">
+      <label class="text-[10px] font-bold text-slate-400 uppercase"
+        >Attendance %</label
+      ><input
+        type="number"
+        id="Attendance"
+        value=""
+        class="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 outline-none focus:border-blue-500 transition font-mono font-bold text-slate-700"
+      />
+    </div>
+    <div class="space-y-1">
+      <label class="text-[10px] font-bold text-slate-400 uppercase"
+        >CAT Score (/100)</label
+      ><input
+        type="number"
+        id="Score"
+        value=""
+        class="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 outline-none focus:border-blue-500 transition font-mono font-bold text-slate-700"
+      />
+    </div>
+    <div class="space-y-1">
+      <label class="text-[10px] font-bold text-slate-400 uppercase"
+        >Past Failures</label
+      ><input
+        type="number"
+        id="Failures"
+        value=""
+        class="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 outline-none focus:border-blue-500 transition font-mono font-bold text-slate-700"
+      />
+    </div>
+  </div>
+  <button
+    onclick="analyzeManual()"
+    id="audit-btn"
+    class="w-full bg-slate-900 text-white font-black py-4 rounded-xl hover:bg-blue-600 shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+  >
+    RUN OVERRIDE / RE-ANALYZE DATA
+  </button>
+</div>
+
+<div
+  id="analysis-result"
+  class="hidden animate-fade bg-white rounded-2xl shadow-2xl overflow-hidden border-2 border-slate-200"
+>
+  <div
+    id="res-header"
+    class="p-6 text-white font-bold flex justify-between items-center transition-colors duration-500"
+  >
+    <div class="flex items-center space-x-3">
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+        ></path>
+      </svg>
+      <span class="tracking-tight uppercase">AI Diagnostic Report</span>
+    </div>
+    <span
+      id="res-badge"
+      class="bg-white px-6 py-2 rounded-full text-slate-800 font-black shadow-inner"
+    ></span>
+  </div>
+
+  <div class="p-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <div class="space-y-6">
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h4
+            class="font-black text-slate-500 uppercase text-[10px] tracking-widest"
+          >
+            Student Context
+          </h4>
+          <span
+            id="res-student-source"
+            class="text-[10px] text-blue-600 font-bold"
+            >Pending selection</span
+          >
+        </div>
+        <div id="res-student-context" class="text-xs text-slate-500">
+          Search or select a student to bind this report.
+        </div>
+      </div>
+      <div class="border-b pb-2 flex justify-between">
+        <h4
+          class="font-black text-slate-400 uppercase text-[10px] tracking-widest"
+        >
+          Explainable AI Insights
+        </h4>
+        <span class="text-[10px] text-blue-500 font-bold italic"
+          >Why Engine Active</span
+        >
+      </div>
+      <ul id="res-reasons" class="space-y-3"></ul>
+    </div>
+    <div class="space-y-6">
+      <div class="border-b pb-2 flex justify-between">
+        <h4
+          class="font-black text-slate-400 uppercase text-[10px] tracking-widest"
+        >
+          Groq Strategic Advisor
+        </h4>
+        <span class="text-[10px] text-blue-500 font-bold italic"
+          >Llama 3.1 LLM</span
+        >
+      </div>
+      <div
+        id="res-ai"
+        class="text-sm text-slate-700 leading-relaxed bg-slate-50 p-6 rounded-2xl border-2 border-dashed border-slate-200 whitespace-pre-wrap font-medium"
+      ></div>
+    </div>
+  </div>
+
+  <div class="border-t border-slate-200 p-8 bg-slate-50">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h4 class="font-black text-slate-800 text-lg">
+          What-If Policy Simulator
+        </h4>
+        <p class="text-xs text-slate-500 font-bold">
+          Test the impact of targeted interventions.
+        </p>
+      </div>
+      <span
+        class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest"
+        >Objective 3</span
+      >
+    </div>
+    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+      <label
+        class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-4"
+        >Mandatory Guided Study Hours:
+        <span id="sim-hours-label" class="text-blue-600 font-black text-lg"
+          >+0</span
+        ></label
+      >
+      <input
+        type="range"
+        id="sim-slider"
+        min="0"
+        max="15"
+        value="0"
+        step="1"
+        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+        oninput="updateSimLabel(this.value)"
+        onchange="runSimulation()"
+      />
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+        <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+          <p class="text-[10px] font-bold text-slate-400 uppercase">
+            Current AI Risk
+          </p>
+          <p id="sim-orig-risk" class="text-xl font-black text-slate-700">
+            --%
+          </p>
+        </div>
+        <div
+          class="p-4 bg-blue-50 rounded-lg border border-blue-100 transform scale-105 shadow-md"
+        >
+          <p class="text-[10px] font-bold text-blue-400 uppercase">
+            Simulated Risk
+          </p>
+          <p id="sim-new-risk" class="text-2xl font-black text-blue-700">--%</p>
+        </div>
+        <div class="p-4 bg-green-50 rounded-lg border border-green-100">
+          <p class="text-[10px] font-bold text-green-500 uppercase">
+            Policy Impact
+          </p>
+          <p id="sim-impact" class="text-sm font-bold text-green-700 mt-1">
+            Baseline Model
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="sms-widget"
+    class="hidden border-t border-slate-200 p-8 bg-slate-900 text-white rounded-b-2xl"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h4 class="font-black text-lg text-white">
+          Africa's Talking SMS Gateway
+        </h4>
+        <p class="text-xs text-slate-400 font-bold">
+          Automated early-warning dispatch.
+        </p>
+      </div>
+      <span
+        class="bg-blue-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest"
+        >AT Sandbox</span
+      >
+    </div>
+    <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+      <input
+        type="text"
+        id="sms-phone"
+        placeholder="e.g. +254700000000"
+        class="flex-1 bg-slate-800 border-2 border-slate-700 p-3 rounded-xl outline-none focus:border-blue-500 transition font-mono text-sm text-white"
+      />
+      <button
+        onclick="sendSMSAlert()"
+        id="sms-btn"
+        class="bg-white text-slate-900 px-6 py-3 font-black rounded-xl hover:bg-slate-200 transition shadow-lg text-sm"
+      >
+        SEND WARNING SMS
+      </button>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div>
+        <label
+          class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2"
+        >
+          Intervention Mode For SMS
+        </label>
+        <select
+          id="sms-intervention-mode"
+          onchange="updateSMSPreview()"
+          class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm text-white"
+        >
+          <option>Attendance Recovery Contract</option>
+          <option>Targeted Remedial Clinic</option>
+          <option>Guided Study Plan (+6 hrs/week)</option>
+          <option>Academic Probation Coaching</option>
+          <option>QA Intervention</option>
+        </select>
+      </div>
+      <div>
+        <label
+          class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2"
+        >
+          Message Preview
+        </label>
+        <div
+          id="sms-preview"
+          class="p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs text-slate-200"
+        >
+          Preview will auto-build from selected intervention.
+        </div>
+      </div>
+    </div>
+    <p id="sms-status" class="text-xs mt-3 hidden font-mono"></p>
+  </div>
+</div>

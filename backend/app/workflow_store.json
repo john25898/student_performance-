@@ -1,0 +1,731 @@
+{
+  "cases": {
+    "5469d181-0f36-46ed-a701-b90021cd11a8": {
+      "id": "5469d181-0f36-46ed-a701-b90021cd11a8",
+      "reg_no": "DEMO/QA/001",
+      "action_name": "QA Intervention",
+      "owner": "Advisor",
+      "priority": "high",
+      "status": "resolved",
+      "expected_risk_reduction": 8.0,
+      "expected_pass_lift": 5.2,
+      "created_at": "2026-04-09T22:24:28.638972+00:00",
+      "due_at": "2026-04-12T22:24:28.638972+00:00",
+      "updated_at": "2026-04-09T22:24:28.653450+00:00",
+      "notes": "test",
+      "justification": "Verified all intervention targets met",
+      "timeline_days": 3,
+      "department": "Unassigned"
+    },
+    "1feab8cc-f910-4da8-af2c-454f7038f1ed": {
+      "id": "1feab8cc-f910-4da8-af2c-454f7038f1ed",
+      "reg_no": "DEMO/CRITICAL/001",
+      "action_name": "Emergency academic advising",
+      "owner": "CoD Office",
+      "priority": "critical",
+      "status": "resolved",
+      "expected_risk_reduction": 14.0,
+      "expected_pass_lift": 9.1,
+      "created_at": "2026-04-09T22:30:58.384654+00:00",
+      "due_at": "2026-04-11T22:30:58.384654+00:00",
+      "updated_at": "2026-04-09T22:34:56.467155+00:00",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timeline_days": 2,
+      "department": "Unassigned"
+    },
+    "7ff274f6-d784-486b-894e-a55a2a943011": {
+      "id": "7ff274f6-d784-486b-894e-a55a2a943011",
+      "reg_no": "DEMO/CRITICAL/001",
+      "action_name": "Emergency academic advising",
+      "owner": "CoD Office",
+      "priority": "critical",
+      "status": "new",
+      "expected_risk_reduction": 14.0,
+      "expected_pass_lift": 9.1,
+      "created_at": "2026-04-09T22:33:24.412350+00:00",
+      "due_at": "2026-04-11T22:33:24.412350+00:00",
+      "updated_at": "2026-04-09T22:33:24.412350+00:00",
+      "notes": "",
+      "justification": "",
+      "timeline_days": 2,
+      "department": "Unassigned"
+    },
+    "21058f3b-eec7-4fb6-a380-514faaead657": {
+      "id": "21058f3b-eec7-4fb6-a380-514faaead657",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Targeted Remedial Clinic",
+      "owner": "Course Lecturer",
+      "priority": "high",
+      "status": "new",
+      "expected_risk_reduction": 9.0,
+      "expected_pass_lift": 5.9,
+      "created_at": "2026-04-09T22:42:12.149421+00:00",
+      "due_at": "2026-04-19T22:42:12.149421+00:00",
+      "updated_at": "2026-04-09T22:42:12.149421+00:00",
+      "notes": "",
+      "justification": "",
+      "timeline_days": 10,
+      "department": "Unassigned"
+    },
+    "8a551709-a035-4d0a-ab98-61a687b23aa9": {
+      "id": "8a551709-a035-4d0a-ab98-61a687b23aa9",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Targeted Remedial Clinic",
+      "owner": "Course Lecturer",
+      "priority": "high",
+      "status": "new",
+      "expected_risk_reduction": 9.0,
+      "expected_pass_lift": 5.9,
+      "created_at": "2026-04-09T22:42:15.642994+00:00",
+      "due_at": "2026-04-19T22:42:15.642994+00:00",
+      "updated_at": "2026-04-09T22:42:15.642994+00:00",
+      "notes": "",
+      "justification": "",
+      "timeline_days": 10,
+      "department": "Unassigned"
+    },
+    "12ba0223-0181-4867-8a6d-13b065e8868f": {
+      "id": "12ba0223-0181-4867-8a6d-13b065e8868f",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Guided Study Plan (+6 hrs/week)",
+      "owner": "Peer Mentor",
+      "priority": "high",
+      "status": "resolved",
+      "expected_risk_reduction": 7.0,
+      "expected_pass_lift": 4.5,
+      "created_at": "2026-04-09T22:42:53.543437+00:00",
+      "due_at": "2026-04-23T22:42:53.543437+00:00",
+      "updated_at": "2026-04-09T22:43:58.117794+00:00",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timeline_days": 14,
+      "department": "Unassigned"
+    },
+    "7bcee9c6-4eee-49d7-b5e9-57a93f359252": {
+      "id": "7bcee9c6-4eee-49d7-b5e9-57a93f359252",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Targeted Remedial Clinic",
+      "owner": "Course Lecturer",
+      "priority": "high",
+      "status": "resolved",
+      "expected_risk_reduction": 9.0,
+      "expected_pass_lift": 5.9,
+      "created_at": "2026-04-09T22:43:21.149089+00:00",
+      "due_at": "2026-04-19T22:43:21.149089+00:00",
+      "updated_at": "2026-04-09T22:43:44.052873+00:00",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timeline_days": 10,
+      "department": "Unassigned"
+    },
+    "d9cbb14b-100e-4115-b1ce-4b6cf818067e": {
+      "id": "d9cbb14b-100e-4115-b1ce-4b6cf818067e",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Academic Probation Coaching",
+      "owner": "CoD Office",
+      "priority": "medium",
+      "status": "new",
+      "expected_risk_reduction": 6.0,
+      "expected_pass_lift": 3.9,
+      "created_at": "2026-04-09T22:54:49.048171+00:00",
+      "due_at": "2026-04-23T22:54:49.048171+00:00",
+      "updated_at": "2026-04-09T22:54:49.048171+00:00",
+      "notes": "",
+      "justification": "",
+      "timeline_days": 14,
+      "department": "Unassigned"
+    },
+    "7cd72683-8f1e-4135-a8b1-0c96fa57dd16": {
+      "id": "7cd72683-8f1e-4135-a8b1-0c96fa57dd16",
+      "reg_no": "IT201/130445/23",
+      "action_name": "Academic Probation Coaching",
+      "owner": "CoD Office",
+      "priority": "medium",
+      "status": "in_progress",
+      "expected_risk_reduction": 6.0,
+      "expected_pass_lift": 3.9,
+      "created_at": "2026-04-09T22:54:51.765839+00:00",
+      "due_at": "2026-04-23T22:54:51.765839+00:00",
+      "updated_at": "2026-04-09T23:12:24.116727+00:00",
+      "notes": "Moved to in_progress",
+      "justification": "",
+      "timeline_days": 14,
+      "department": "Unassigned"
+    },
+    "85843db4-b177-4511-b5af-897a12d56634": {
+      "id": "85843db4-b177-4511-b5af-897a12d56634",
+      "reg_no": "CS201/130014/24",
+      "department": "Department of Computer Science",
+      "action_name": "Attendance Recovery Contract",
+      "owner": "Academic Advisor",
+      "priority": "critical",
+      "status": "resolved",
+      "expected_risk_reduction": 12.0,
+      "expected_pass_lift": 7.8,
+      "created_at": "2026-04-10T01:49:07.284531+00:00",
+      "due_at": "2026-04-17T01:49:07.284531+00:00",
+      "updated_at": "2026-04-10T08:00:50.247927+00:00",
+      "notes": "Resolved with evidence: Attendance improved above threshold, remedial tasks completed, and follow-up assessment confirmed progress.",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timeline_days": 7,
+      "evidence_summary": "Attendance improved above threshold, remedial tasks completed, and follow-up assessment confirmed progress.",
+      "checklist_completed": 2
+    },
+    "390ee9c7-470c-43b8-8cc9-df3b40fcd186": {
+      "id": "390ee9c7-470c-43b8-8cc9-df3b40fcd186",
+      "reg_no": "IT201/131264/24",
+      "department": "Department of Information Technology",
+      "action_name": "Attendance Recovery Contract",
+      "owner": "Academic Advisor",
+      "priority": "critical",
+      "status": "in_progress",
+      "expected_risk_reduction": 12.0,
+      "expected_pass_lift": 7.8,
+      "created_at": "2026-04-10T02:29:03.946782+00:00",
+      "due_at": "2026-04-17T02:29:03.946782+00:00",
+      "updated_at": "2026-04-10T02:29:13.338896+00:00",
+      "notes": "Moved to in_progress",
+      "justification": "",
+      "timeline_days": 7
+    }
+  },
+  "history": [
+    {
+      "event_id": "4c0b71c4-018b-4582-b966-18c8cda782ef",
+      "case_id": "5469d181-0f36-46ed-a701-b90021cd11a8",
+      "reg_no": "DEMO/QA/001",
+      "timestamp": "2026-04-09T22:24:28.638972+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "8b24542b-580a-4cac-b953-1ba50397b133",
+      "case_id": "5469d181-0f36-46ed-a701-b90021cd11a8",
+      "reg_no": "DEMO/QA/001",
+      "timestamp": "2026-04-09T22:24:28.653450+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "resolved",
+      "notes": "test",
+      "justification": "Verified all intervention targets met"
+    },
+    {
+      "event_id": "86ac3e3e-49fc-4f63-9dab-9dd441354191",
+      "case_id": "5469d181-0f36-46ed-a701-b90021cd11a8",
+      "reg_no": "DEMO/QA/001",
+      "expected_risk_reduction": 8.0,
+      "resolved_at": "2026-04-09T22:24:28.653450+00:00",
+      "role": "CoD",
+      "action": "resolved_case",
+      "old_state": "new",
+      "new_state": "resolved",
+      "notes": "test",
+      "justification": "Verified all intervention targets met",
+      "timestamp": "2026-04-09T22:24:28.653450+00:00"
+    },
+    {
+      "event_id": "43fb6b5d-2016-4325-993f-04df0db32855",
+      "case_id": "1feab8cc-f910-4da8-af2c-454f7038f1ed",
+      "reg_no": "DEMO/CRITICAL/001",
+      "timestamp": "2026-04-09T22:30:58.384654+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "403b0d33-671f-4de0-86e6-6528145938e1",
+      "case_id": "7ff274f6-d784-486b-894e-a55a2a943011",
+      "reg_no": "DEMO/CRITICAL/001",
+      "timestamp": "2026-04-09T22:33:24.412350+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "c03affc9-6606-4e76-9fd6-a3eace97c179",
+      "case_id": "1feab8cc-f910-4da8-af2c-454f7038f1ed",
+      "reg_no": "DEMO/CRITICAL/001",
+      "timestamp": "2026-04-09T22:34:22.403060+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "in_progress",
+      "notes": "Moved to in_progress",
+      "justification": ""
+    },
+    {
+      "event_id": "1d09c06d-931f-4ae4-8188-346d7b24e3aa",
+      "case_id": "1feab8cc-f910-4da8-af2c-454f7038f1ed",
+      "reg_no": "DEMO/CRITICAL/001",
+      "timestamp": "2026-04-09T22:34:56.467155+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes."
+    },
+    {
+      "event_id": "e2d37a81-3472-4e26-a227-db9dbb1d649d",
+      "case_id": "1feab8cc-f910-4da8-af2c-454f7038f1ed",
+      "reg_no": "DEMO/CRITICAL/001",
+      "expected_risk_reduction": 14.0,
+      "resolved_at": "2026-04-09T22:34:56.467155+00:00",
+      "role": "CoD",
+      "action": "resolved_case",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timestamp": "2026-04-09T22:34:56.467155+00:00"
+    },
+    {
+      "event_id": "5c61bd08-36d3-4ec1-b683-fc3d1e5e9b03",
+      "case_id": "21058f3b-eec7-4fb6-a380-514faaead657",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:42:12.149421+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "eb8de975-8a0f-494e-a0d3-a19ff737957a",
+      "case_id": "8a551709-a035-4d0a-ab98-61a687b23aa9",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:42:15.642994+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "d8109969-2d20-4c0d-b43f-5b155f4e1380",
+      "case_id": "12ba0223-0181-4867-8a6d-13b065e8868f",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:42:53.543437+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "21ad3272-fc49-40ee-8d89-c5c0cd02e9c6",
+      "case_id": "7bcee9c6-4eee-49d7-b5e9-57a93f359252",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:43:21.149089+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "150825bb-d380-47c3-8a5d-f560d732a6a9",
+      "case_id": "7bcee9c6-4eee-49d7-b5e9-57a93f359252",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:43:44.052873+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes."
+    },
+    {
+      "event_id": "f49355d9-7a46-4001-97f4-6abb2dab8394",
+      "case_id": "7bcee9c6-4eee-49d7-b5e9-57a93f359252",
+      "reg_no": "IT201/130445/23",
+      "expected_risk_reduction": 9.0,
+      "resolved_at": "2026-04-09T22:43:44.052873+00:00",
+      "role": "CoD",
+      "action": "resolved_case",
+      "old_state": "new",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timestamp": "2026-04-09T22:43:44.052873+00:00"
+    },
+    {
+      "event_id": "8e3c656f-245a-49ac-b671-4fd1d2836293",
+      "case_id": "12ba0223-0181-4867-8a6d-13b065e8868f",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:43:50.057965+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "in_progress",
+      "notes": "Moved to in_progress",
+      "justification": ""
+    },
+    {
+      "event_id": "0c6d508f-de7a-474f-bcf6-b39a67585b7d",
+      "case_id": "12ba0223-0181-4867-8a6d-13b065e8868f",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:43:58.117794+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes."
+    },
+    {
+      "event_id": "85ae4439-eb93-48a3-9f16-44d6be730da5",
+      "case_id": "12ba0223-0181-4867-8a6d-13b065e8868f",
+      "reg_no": "IT201/130445/23",
+      "expected_risk_reduction": 7.0,
+      "resolved_at": "2026-04-09T22:43:58.117794+00:00",
+      "role": "CoD",
+      "action": "resolved_case",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Moved to resolved",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timestamp": "2026-04-09T22:43:58.117794+00:00"
+    },
+    {
+      "event_id": "f0311756-0fc1-46d6-be9d-26f26d2e7335",
+      "case_id": "d9cbb14b-100e-4115-b1ce-4b6cf818067e",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:54:49.048171+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "7bdce04c-7974-477f-a4b3-e5be3210f82c",
+      "case_id": "7cd72683-8f1e-4135-a8b1-0c96fa57dd16",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T22:54:51.765839+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "f06ce4f1-f7e3-4842-89f8-d3525b8ee476",
+      "case_id": "7cd72683-8f1e-4135-a8b1-0c96fa57dd16",
+      "reg_no": "IT201/130445/23",
+      "timestamp": "2026-04-09T23:12:24.116727+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "in_progress",
+      "notes": "Moved to in_progress",
+      "justification": ""
+    },
+    {
+      "event_id": "d8be9a04-b023-4477-9f9b-7255ef5ce010",
+      "case_id": "85843db4-b177-4511-b5af-897a12d56634",
+      "reg_no": "CS201/130014/24",
+      "timestamp": "2026-04-10T01:49:07.284531+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "35fc6bb6-9cad-4530-a22b-e94aa970eee3",
+      "case_id": "85843db4-b177-4511-b5af-897a12d56634",
+      "reg_no": "CS201/130014/24",
+      "timestamp": "2026-04-10T01:49:18.701081+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "in_progress",
+      "notes": "Moved to in_progress",
+      "justification": ""
+    },
+    {
+      "event_id": "4f91eb67-7649-4335-9d55-f26db3075acd",
+      "case_id": "390ee9c7-470c-43b8-8cc9-df3b40fcd186",
+      "reg_no": "IT201/131264/24",
+      "timestamp": "2026-04-10T02:29:03.946782+00:00",
+      "role": "System",
+      "action": "created_case",
+      "old_state": "none",
+      "new_state": "new",
+      "notes": "Case created from intervention recommendation",
+      "justification": "Initial intervention assignment"
+    },
+    {
+      "event_id": "2f2753a1-7758-4043-a1cf-0d3e6260b878",
+      "case_id": "390ee9c7-470c-43b8-8cc9-df3b40fcd186",
+      "reg_no": "IT201/131264/24",
+      "timestamp": "2026-04-10T02:29:13.338896+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "new",
+      "new_state": "in_progress",
+      "notes": "Moved to in_progress",
+      "justification": ""
+    },
+    {
+      "event_id": "a3606740-39c0-481e-9500-d7508fcc8085",
+      "case_id": "85843db4-b177-4511-b5af-897a12d56634",
+      "reg_no": "CS201/130014/24",
+      "timestamp": "2026-04-10T08:00:50.247927+00:00",
+      "role": "CoD",
+      "action": "status_change",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Resolved with evidence: Attendance improved above threshold, remedial tasks completed, and follow-up assessment confirmed progress.",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "evidence_summary": "Attendance improved above threshold, remedial tasks completed, and follow-up assessment confirmed progress.",
+      "checklist_completed": 2
+    },
+    {
+      "event_id": "cc37c812-22df-48d7-b61d-804d94547160",
+      "case_id": "85843db4-b177-4511-b5af-897a12d56634",
+      "reg_no": "CS201/130014/24",
+      "expected_risk_reduction": 12.0,
+      "resolved_at": "2026-04-10T08:00:50.247927+00:00",
+      "role": "CoD",
+      "action": "resolved_case",
+      "old_state": "in_progress",
+      "new_state": "resolved",
+      "notes": "Resolved with evidence: Attendance improved above threshold, remedial tasks completed, and follow-up assessment confirmed progress.",
+      "justification": "Risk reduced after verified intervention outcomes.",
+      "timestamp": "2026-04-10T08:00:50.247927+00:00"
+    }
+  ],
+  "explainability_snapshots": {
+    "IT201/130445/23": [
+      {
+        "name": "Failure Load",
+        "value": 2,
+        "weight": 0.7,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 3.2,
+        "weight": 0.467,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 2.31,
+        "weight": 0.175,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 70.8,
+        "weight": 0.056,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "BBIT201/121575/23": [
+      {
+        "name": "Failure Load",
+        "value": 2,
+        "weight": 0.7,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 2.05,
+        "weight": 0.268,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 4.8,
+        "weight": 0.2,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 62.6,
+        "weight": 0.165,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "CS201/130014/24": [
+      {
+        "name": "Failure Load",
+        "value": 11,
+        "weight": 1.0,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 2.1,
+        "weight": 0.65,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 1.73,
+        "weight": 0.382,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 64.5,
+        "weight": 0.14,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "CJ201/191988/23": [
+      {
+        "name": "Failure Load",
+        "value": 2,
+        "weight": 0.7,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 3.1,
+        "weight": 0.483,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 2.26,
+        "weight": 0.193,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 62.2,
+        "weight": 0.171,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "IT201/131201/24": [
+      {
+        "name": "Failure Load",
+        "value": 8,
+        "weight": 1.0,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 1.2,
+        "weight": 0.8,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 1.92,
+        "weight": 0.314,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 66.9,
+        "weight": 0.108,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "IT201/131264/24": [
+      {
+        "name": "Failure Load",
+        "value": 12,
+        "weight": 1.0,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 2.4,
+        "weight": 0.6,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 1.54,
+        "weight": 0.45,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 55.4,
+        "weight": 0.261,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ],
+    "CS201/130001/24": [
+      {
+        "name": "Failure Load",
+        "value": 8,
+        "weight": 1.0,
+        "direction": "risk_up",
+        "insight": "Past failed units increase repeat-risk and confidence penalties."
+      },
+      {
+        "name": "Study Momentum",
+        "value": 1.5,
+        "weight": 0.75,
+        "direction": "risk_up",
+        "insight": "Insufficient weekly study hours correlate with weaker exam outcomes."
+      },
+      {
+        "name": "GPA Cushion",
+        "value": 2.0,
+        "weight": 0.286,
+        "direction": "risk_up",
+        "insight": "Lower GPA narrows recovery capacity before final exams."
+      },
+      {
+        "name": "Attendance Drag",
+        "value": 67.0,
+        "weight": 0.107,
+        "direction": "risk_up",
+        "insight": "Low attendance strongly reduces outcome reliability."
+      }
+    ]
+  }
+}
