@@ -1,5 +1,8 @@
 import os
+from dotenv import load_dotenv
 from supabase import create_client, Client
+
+load_dotenv()
 
 # Your local Supabase credentials
 url: str = os.getenv("SUPABASE_URL", "http://127.0.0.1:54321")

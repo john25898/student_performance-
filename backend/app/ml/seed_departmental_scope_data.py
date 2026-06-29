@@ -3,7 +3,10 @@ import os
 import random
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
 from supabase import Client, create_client
+
+load_dotenv()
 
 
 SUPABASE_URL = os.getenv("SUPABASE_URL", "http://127.0.0.1:54321")

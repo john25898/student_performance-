@@ -4,7 +4,11 @@ from uuid import uuid4
 import json
 
 import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
+
+# Load environment variables from .env file at project root
+load_dotenv()
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
