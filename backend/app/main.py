@@ -195,6 +195,100 @@ def normalize_department(value: str | None) -> str | None:
     return cleaned
 
 
+# ──────────────────────────────────────────────
+# DEMO / OFFLINE MODE — Synthetic data generator
+# When Supabase is not available, we generate
+# realistic mock data so the UI works out of the box.
+# ──────────────────────────────────────────────
+import random as _random
+
+_MOCK_FIRST_NAMES = ["Amani","Brian","Caroline","Davis","Edna","Faith","George","Hellen","Ian","Joan","Kevin","Linda","Martin","Naomi","Otieno","Purity","Ruth","Samuel","Tracy","Victor","Wanjiku","Yvonne","Zablon"]
+_MOCK_LAST_NAMES = ["Mwangi","Achieng","Kariuki","Mutiso","Wambui","Kiptoo","Njoroge","Muthoni","Chebet","Otieno","Omondi","Maina","Wekesa"]
+_MOCK_PROGRAM_PREFIX = {
+    "Bachelor of Science Computer Science":"CS201","Bachelor of Science Computer Technology":"CT201","Bachelor of Science Data Science":"DS201","Bachelor of Science in Computer Security & Forensics":"CSF201","Bachelor of Science in Information Technology":"IT201","Bachelor of Science In Information Science":"IS201","Bachelor of Business Information Technology":"BBIT201","Bachelor of Communication and Journalism":"CJ201"}
+_MOCK_COURSES = {
+    "Department of Computer Science": [("CCS-3201","Data Mining and Warehousing"),("CCS-3202","Advanced Algorithms"),("CCS-3203","Cloud Native Systems"),("CCS-3204","Applied Cyber Forensics")],
+    "Department of Information Technology": [("CIT-3201","Enterprise Networking"),("CIT-3202","Systems Administration"),("CIT-3203","Business Information Systems"),("CIT-3204","Service Management and IT Governance")],
+    "Department of Information and Media Studies": [("CIM-3201","Digital Media Production"),("CIM-3202","Broadcast Journalism"),("CIM-3203","Media Research Methods"),("CIM-3204","Communication Ethics and Policy")]}
+
+_MOCK_DATA_CACHE: dict[str, list[dict]] = {}
+
+def _generate_mock_data():
+    """Generate ~30 students per department with grades & courses, cached in memory."""
+    if _MOCK_DATA_CACHE:
+        return
+
+    dept_list = list(DEPARTMENT_PROGRAM_MAP.keys())
+    courses_out: list[dict] = []
+    cid = 1
+    for dept, entries in _MOCK_COURSES.items():
+        for code, name in entries:
+            courses_out.append({"id":cid,"course_code":code,"course_name":name,"department":dept,"credits":3})
+            cid += 1
+    _MOCK_DATA_CACHE["courses"] = courses_out
+
+    course_map: dict[str, list[int]] = {d:[] for d in dept_list}
+    for c in courses_out:
+        course_map.setdefault(c["department"],[]).append(c["id"])
+
+    students_out: list[dict] = []
+    grades_out: list[dict] = []
+    sid = 1
+    gid = 1
+    for dept, programs in DEPARTMENT_PROGRAM_MAP.items():
+        for idx in range(1, 31):
+            program = _random.choice(programs)
+            prefix = _MOCK_PROGRAM_PREFIX[program]
+            reg_no = f"{prefix}/{130000 + idx}/24"
+            first = _random.choice(_MOCK_FIRST_NAMES)
+            last = _random.choice(_MOCK_LAST_NAMES)
+            students_out.append({"id":sid,"student_number":reg_no,"first_name":first,"last_name":last,"year_of_study":_random.choice([2,3,4]),"program":program,"department":dept})
+            # 2-4 grades per student
+            dept_courses = course_map.get(dept, [])
+            if not dept_courses:
+                continue
+            for course_id in _random.sample(dept_courses, min(_random.randint(2,4), len(dept_courses))):
+                att = round(_random.uniform(40.0, 100.0), 1)
+                if att < 65.0:
+                    cat = round(_random.uniform(10.0, 19.0), 1)
+                    shours = round(_random.uniform(1.0, 3.5), 1)
+                    passed = False
+                else:
+                    cat = round(_random.uniform(20.0, 29.0), 1)
+                    shours = round(_random.uniform(4.0, 12.0), 1)
+                    passed = True
+                exam = round(cat * 2.2, 1)
+                total = round(cat + exam, 1)
+                grade = "A" if total >= 70 else "B" if total >= 60 else "C" if total >= 50 else "F"
+                semester = f"Y{_random.choice([2,3])}S{_random.choice([1,2])}"
+                grades_out.append({"id":gid,"student_id":sid,"course_id":course_id,"semester":semester,"score":total,"grade":grade,"attendance_percent":att,"cat_score":cat,"exam_score":exam,"study_hours_per_week":shours,"is_passed":passed})
+                gid += 1
+            sid += 1
+    _MOCK_DATA_CACHE["students"] = students_out
+    _MOCK_DATA_CACHE["grades"] = grades_out
+
+_USE_MOCK_DATA = False
+
+def _check_and_seed_mock_data():
+    global _USE_MOCK_DATA
+    if _USE_MOCK_DATA:
+        _generate_mock_data()
+        return
+    # Test if DB is reachable by trying a small fetch
+    try:
+        test = db.table("students").select("id").limit(1).execute().data
+        if not test:
+            print("⚠️  Database is empty. Switching to demo mode with synthetic data.")
+            _USE_MOCK_DATA = True
+            _generate_mock_data()
+        else:
+            print(f"✅ Database connected — {len(test)} records found.")
+    except Exception as e:
+        print(f"⚠️  Database unreachable ({e}). Switching to demo mode with synthetic data.")
+        _USE_MOCK_DATA = True
+        _generate_mock_data()
+
+
 def department_filter_passes(student_dept: str | None, scope_department: str | None) -> bool:
     if not scope_department:
         return True
@@ -202,24 +296,86 @@ def department_filter_passes(student_dept: str | None, scope_department: str | N
 
 
 def fetch_all_table_rows(table_name: str, columns: str, page_size: int = 1000) -> list[dict]:
+    # Use mock data if in demo mode
+    if _USE_MOCK_DATA:
+        _generate_mock_data()
+        data = _MOCK_DATA_CACHE.get(table_name, [])
+        if columns == "*" or columns.strip() == "*":
+            return list(data)
+        wanted = [c.strip() for c in columns.split(",")]
+        return [{k: r[k] for k in wanted if k in r} for r in data]
+
     rows: list[dict] = []
     start = 0
     while True:
-        chunk = (
-            db.table(table_name)
-            .select(columns)
-            .range(start, start + page_size - 1)
-            .execute()
-            .data
-            or []
-        )
+        try:
+            chunk = (
+                db.table(table_name)
+                .select(columns)
+                .range(start, start + page_size - 1)
+                .execute()
+                .data
+                or []
+            )
+        except Exception:
+            return rows if rows else _fallback_mock(table_name, columns)
         if not chunk:
             break
         rows.extend(chunk)
         if len(chunk) < page_size:
             break
         start += page_size
+    if not rows:
+        return _fallback_mock(table_name, columns)
     return rows
+
+
+def _fallback_mock(table_name: str, columns: str) -> list[dict]:
+    _generate_mock_data()
+    data = _MOCK_DATA_CACHE.get(table_name, [])
+    if columns == "*" or columns.strip() == "*":
+        return list(data)
+    wanted = [c.strip() for c in columns.split(",")]
+    return [{k: r[k] for k in wanted if k in r} for r in data]
+
+
+def _mock_db_query(table_name: str, columns: str = "*", eq_column: str | None = None, eq_value: str | None = None) -> dict:
+    """Mock replacement for db.table().select().eq().execute() pattern."""
+    data = _fallback_mock(table_name, columns) if _USE_MOCK_DATA else []
+    result = data
+    if eq_column and eq_value is not None and result:
+        result = [r for r in result if str(r.get(eq_column, "")) == str(eq_value)]
+    class MockResponse:
+        def __init__(self, d):
+            self.data = d
+    return MockResponse(result)
+
+
+def _student_by_reg(reg_no: str) -> dict | None:
+    """Lookup student by reg_no — checks DB first, falls back to mock."""
+    if _USE_MOCK_DATA:
+        _generate_mock_data()
+        for s in _MOCK_DATA_CACHE.get("students", []):
+            if s["student_number"] == reg_no:
+                return dict(s)
+        return None
+    try:
+        res = db.table("students").select("*").eq("student_number", reg_no).limit(1).execute()
+        return res.data[0] if res.data else None
+    except Exception:
+        return None
+
+
+def _grades_for_student(student_id: int) -> list[dict]:
+    """Get grades for a student — checks DB first, falls back to mock."""
+    if _USE_MOCK_DATA:
+        _generate_mock_data()
+        return [dict(g) for g in _MOCK_DATA_CACHE.get("grades", []) if g["student_id"] == student_id]
+    try:
+        res = db.table("grades").select("*").eq("student_id", student_id).execute()
+        return res.data or []
+    except Exception:
+        return []
 
 
 def resolve_lecturer_name(course_code: str | None, course_name: str | None) -> str:
@@ -283,13 +439,10 @@ def predict_next_from_series(values: list[float], min_value: float = 0.0, max_va
 
 
 def get_student_department_by_reg(reg_no: str) -> str:
-    try:
-        data = db.table("students").select("department").eq("student_number", reg_no).limit(1).execute().data
-        if not data:
-            return "Unassigned"
-        return normalize_department(data[0].get("department")) or "Unassigned"
-    except Exception:
-        return "Unassigned"
+    student = _student_by_reg(reg_no)
+    if student:
+        return normalize_department(student.get("department")) or "Unassigned"
+    return "Unassigned"
 
 
 def case_matches_scope(case: dict, scope_department: str | None) -> bool:
@@ -1217,18 +1370,14 @@ async def get_department_alerts(scope_department: str | None = None):
 @app.get("/database-audit/{reg_no:path}")
 async def audit_student_from_db(reg_no: str, scope_department: str | None = None):
     scoped_dept = normalize_department(scope_department)
-    student_res = db.table("students").select("*").eq("student_number", reg_no).execute()
-
-    if not student_res.data:
+    student = _student_by_reg(reg_no)
+    if not student:
         return {"error": f"Student {reg_no} not found in the SCI Registry."}
 
-    student = student_res.data[0]
     if not department_filter_passes(student.get("department"), scoped_dept):
         return {"error": f"Student {reg_no} is outside your department scope."}
 
-    grades_res = db.table("grades").select("*").eq("student_id", student['id']).execute()
-    records = grades_res.data
-
+    records = _grades_for_student(student['id'])
     if not records:
         return {"error": f"No academic records found for {reg_no}."}
 
@@ -1490,15 +1639,14 @@ async def get_dean_analytics(scope_department: str | None = None):
 @app.get("/wow/student-digital-twin/{reg_no:path}")
 async def get_student_digital_twin(reg_no: str, scope_department: str | None = None):
     scoped_dept = normalize_department(scope_department)
-    student_res = db.table("students").select("*").eq("student_number", reg_no).execute()
-    if not student_res.data:
+    student = _student_by_reg(reg_no)
+    if not student:
         return {"error": f"Student {reg_no} not found."}
 
-    student = student_res.data[0]
     if not department_filter_passes(student.get("department"), scoped_dept):
         return {"error": f"Student {reg_no} is outside your department scope."}
 
-    grades = db.table("grades").select("*").eq("student_id", student['id']).execute().data
+    grades = _grades_for_student(student['id'])
     if not grades:
         return {"error": f"No grade history found for {reg_no}."}
 
@@ -1722,15 +1870,14 @@ async def get_counterfactual_target(
     scope_department: str | None = None,
 ):
     scoped_dept = normalize_department(scope_department)
-    student_res = db.table("students").select("*").eq("student_number", reg_no).execute()
-    if not student_res.data:
+    student = _student_by_reg(reg_no)
+    if not student:
         return {"error": f"Student {reg_no} not found."}
 
-    student = student_res.data[0]
     if not department_filter_passes(student.get("department"), scoped_dept):
         return {"error": f"Student {reg_no} is outside your department scope."}
 
-    grades = db.table("grades").select("*").eq("student_id", student['id']).execute().data
+    grades = _grades_for_student(student['id'])
     if not grades:
         return {"error": f"No grade history found for {reg_no}."}
 
@@ -2457,6 +2604,8 @@ async def get_live_notifications(limit: int = 10, scope_department: str | None =
         "items": notifications[:limit],
     }
 
+# Seed mock data if database is unavailable
+_check_and_seed_mock_data()
 
 if __name__ == "__main__":
     uvicorn.run("backend.app.main:app", host="127.0.0.1", port=8000, reload=True)
