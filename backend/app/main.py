@@ -23,24 +23,42 @@ except Exception:
     _PYCARET_AVAILABLE = False
 import uvicorn
 from groq import Groq
-from supabase import create_client, Client
-import africastalking
+try:
+    from supabase import create_client, Client
+except ImportError:
+    create_client = None
+    Client = None
+try:
+    import africastalking
+except ImportError:
+    africastalking = None
 
-# --- Initialize Database (Supabase) ---
+# --- Initialize Database (Supabase) — SAFE: won't crash if missing .env or package ---
 SUPABASE_URL = os.getenv("SUPABASE_URL", "http://127.0.0.1:54321")
 SUPABASE_KEY = os.getenv("SUPABASE_ANON_KEY", "")
-db: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+db: Client | None = None
+if create_client is not None:
+    try:
+        db = create_client(SUPABASE_URL, SUPABASE_KEY)
+    except Exception:
+        db = None
+else:
+    print("⚠️  supabase package not installed. Will use demo mode.")
 
-# --- Initialize Africa's Talking (SMS Gateway) ---
+# --- Initialize Africa's Talking (SMS Gateway) — SAFE ---
 AT_USERNAME = os.getenv("AT_USERNAME", "sandbox")
 AT_API_KEY = os.getenv("AT_API_KEY", "")
-if AT_API_KEY:
-    africastalking.initialize(AT_USERNAME, AT_API_KEY)
-sms = africastalking.SMS
+sms = None
+if AT_API_KEY and africastalking is not None:
+    try:
+        africastalking.initialize(AT_USERNAME, AT_API_KEY)
+        sms = africastalking.SMS
+    except Exception:
+        sms = None
 
-# --- Initialize Groq (Generative AI) ---
+# --- Initialize Groq (Generative AI) — SAFE ---
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 FRONTEND_DIR = BASE_DIR / "frontend"
@@ -275,6 +293,11 @@ def _check_and_seed_mock_data():
         _generate_mock_data()
         return
     # Test if DB is reachable by trying a small fetch
+    if db is None:
+        print("⚠️  No database configured. Switching to demo mode with synthetic data.")
+        _USE_MOCK_DATA = True
+        _generate_mock_data()
+        return
     try:
         test = db.table("students").select("id").limit(1).execute().data
         if not test:
@@ -1292,6 +1315,8 @@ async def notify_student(req: SMSRequest):
         f"Student action plan -> {steps_text}"
     )
     try:
+        if not sms:
+            return {"status": "error", "message": "SMS not configured (AT_API_KEY missing)."}
         response = sms.send(message, [req.phone_number])
         return {"status": "success", "response": response, "message_preview": message}
     except Exception as e:
@@ -1477,7 +1502,9 @@ async def predict_student_risk(student: StudentData):
     """
 
     try:
-        chat_completion = client.chat.completions.create(
+        if not groq_client:
+            raise RuntimeError("Groq client not initialized")
+        chat_completion = groq_client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
             model="llama-3.1-8b-instant",
             temperature=0.3,
